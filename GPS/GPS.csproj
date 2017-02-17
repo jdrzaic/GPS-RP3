@@ -84,6 +84,10 @@
       <HintPath>..\packages\Microsoft.Extensions.Primitives.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Priority Queue, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OptimizedPriorityQueue.4.0.0\lib\net45\Priority Queue.dll</HintPath>
       <Private>True</Private>
@@ -142,6 +146,18 @@
     <Compile Include="ILocated.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\GraphMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\GraphMainForm.Designer.cs">
+      <DependentUpon>GraphMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LandingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LandingForm.Designer.cs">
+      <DependentUpon>LandingForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -152,7 +168,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
-    <None Include="packages.config" />
+    <EmbeddedResource Include="Views\LandingForm.resx">
+      <DependentUpon>LandingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Views\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

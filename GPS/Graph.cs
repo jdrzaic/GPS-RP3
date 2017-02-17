@@ -24,6 +24,7 @@ namespace GPS
     {
         [Key]
         public int GraphId;
+        public string graphName {get; set;}
         public void LoadFromDb() { throw new NotImplementedException(); }
         public void SaveToDb() { throw new NotImplementedException(); }
 
