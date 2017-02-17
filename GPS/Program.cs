@@ -21,6 +21,7 @@ namespace GPS
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Views.LandingForm());
+            //Application.Run(new Form1());
         }
     }
 }

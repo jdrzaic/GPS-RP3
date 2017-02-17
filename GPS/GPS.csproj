@@ -144,6 +144,11 @@
     <Compile Include="GPSData.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="ILocated.cs" />
+    <Compile Include="Migrations\201702171355439_initial.cs" />
+    <Compile Include="Migrations\201702171355439_initial.Designer.cs">
+      <DependentUpon>201702171355439_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\GraphMainForm.cs">
@@ -158,6 +163,9 @@
     <Compile Include="Views\LandingForm.Designer.cs">
       <DependentUpon>LandingForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Migrations\201702171355439_initial.resx">
+      <DependentUpon>201702171355439_initial.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -171,6 +179,7 @@
     <EmbeddedResource Include="Views\LandingForm.resx">
       <DependentUpon>LandingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Views\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

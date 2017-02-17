@@ -13,27 +13,42 @@ namespace GPS.Views
     public partial class LandingForm : Form
     {
         private static int OFFSET_LIST = 10;
+
         public LandingForm()
         {
             InitializeComponent();
             CustomizeComponent();
             InitializeStaticProperties();
+            addGraphsToListView();
+        }
+
+        public void addGraphsToListView()
+        {
+            var entities = Program.DbContext.Graphs;
+            foreach (var entity in entities)
+            {
+                var name = entity.graphName;
+                if (name == null || name.Trim() == "") continue;
+                this.listBox1.Items.Add(name);
+            }   
         }
 
         public void InitializeStaticProperties()
         {
             this.splitContainer1.BorderStyle = BorderStyle.FixedSingle;
-            ColumnHeader columnHeader = new ColumnHeader();
-            columnHeader.Text = "Existing graph";
-            columnHeader.TextAlign = HorizontalAlignment.Center;
-            columnHeader.Width = this.listView1.ClientRectangle.Width;
-            this.listView1.Columns.Add(columnHeader);
+            this.listBox1.DrawMode = DrawMode.OwnerDrawVariable;
+            this.listBox1.MeasureItem += ListBox1_MeasureItem;
+        }
+
+        private void ListBox1_MeasureItem(object sender, MeasureItemEventArgs e)
+        {
+
         }
 
         public void CustomizeComponent()
         {
-            this.listView1.View = View.Details;
-            this.listView1.Size = new Size(this.splitContainer1.Panel1.ClientRectangle.Width - 2 * OFFSET_LIST,
+            // this.listBox1.View = View.Details;
+            this.listBox1.Size = new Size(this.splitContainer1.Panel1.ClientRectangle.Width - 2 * OFFSET_LIST,
                 this.splitContainer1.Panel1.ClientRectangle.Height - 2 * OFFSET_LIST);
             this.label2.Location = new Point(this.splitContainer1.Panel2.Width / 2 - this.label2.Width / 2, this.splitContainer1.ClientRectangle.Height / 2 - this.label2.Height);
             this.richTextBox1.Location = new Point(this.splitContainer1.Panel2.Width / 2 - richTextBox1.ClientRectangle.Width / 2, this.splitContainer1.Height / 2);

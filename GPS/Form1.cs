@@ -17,13 +17,18 @@ namespace GPS
         {
             InitializeComponent();
             var graph1 = new GPSGraph();
+            graph1.graphName = "Zagreb";
+            var graph2 = new GPSGraph();
+            graph2.graphName = "Varaždin";
             var node1 = new GPSNode { Name = "Kvatric" };
             var KvatricNode = graph1.NewNode(node1);
             Program.DbContext.Graphs.Add(graph1);
+            Program.DbContext.Graphs.Add(graph2);
             Program.DbContext.SaveChanges();
             var graph = Program.DbContext.Graphs.First();
-            Debug.WriteLine(graph);
-            Debug.WriteLine(Program.DbContext.Graphs.Count());
+            Debug.WriteLine(graph.graphName);
+            // Debug.WriteLine(graph);
+            // Debug.WriteLine(Program.DbContext.Graphs.Count());
             //Debug.WriteLine(graph.data.Count());
             //var tbjNode = graph.Nodes.First();
             //var kvatricNode = graph.Nodes.Skip(1).First();
@@ -36,8 +41,8 @@ namespace GPS
             //var kvatricNode = graph.NewNode(kvatric);
             //tbjNode.ConnectBothWays(vlaska, 10, kvatricNode);
 
-            var preds = new List<Predicate<GPSNode>>();
-            preds.Add(g => g.Name == "TBJ");
+            // var preds = new List<Predicate<GPSNode>>();
+            // preds.Add(g => g.Name == "TBJ");
             //var path = tbjNode.GetBestPath(kvatricNode, preds);
             //foreach (var n in path) Debug.WriteLine(n);
 
