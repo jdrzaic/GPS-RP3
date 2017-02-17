@@ -12,6 +12,8 @@ namespace GPS.Views
 {
     public partial class GraphMainForm: Form
     {
+        public int graphId;
+
         public GraphMainForm()
         {
             InitializeComponent();

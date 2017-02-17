@@ -13,6 +13,7 @@ namespace GPS.Views
     public partial class LandingForm : Form
     {
         private static int OFFSET_LIST = 10;
+        private Dictionary<string, int> GraphsInfo = new Dictionary<string, int>();
 
         public LandingForm()
         {
@@ -24,12 +25,15 @@ namespace GPS.Views
 
         public void addGraphsToListView()
         {
+            this.GraphsInfo = new Dictionary<string, int>();
             var entities = Program.DbContext.Graphs;
             foreach (var entity in entities)
             {
                 var name = entity.graphName;
                 if (name == null || name.Trim() == "") continue;
+                if (this.GraphsInfo.ContainsKey(name)) continue;
                 this.listBox1.Items.Add(name);
+                this.GraphsInfo.Add(name, entity.GPSGraphId);
             }   
         }
 
@@ -39,7 +43,17 @@ namespace GPS.Views
             this.listBox1.DrawMode = DrawMode.OwnerDrawVariable;
             this.listBox1.DrawItem += new DrawItemEventHandler(ListBox1_DrawItem);
             this.listBox1.MeasureItem += new MeasureItemEventHandler(ListBox1_MeasureItem);
-           
+            this.listBox1.MouseDoubleClick += ListBox1_MouseDoubleClick;
+        }
+
+        private void ListBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = this.listBox1.IndexFromPoint(e.Location);
+            if (index == ListBox.NoMatches) return;
+            var graphName = this.listBox1.Items[index].ToString();
+            var graphForm = new GraphMainForm();
+            graphForm.graphId = this.GraphsInfo[graphName];
+            graphForm.ShowDialog();
         }
 
         private void ListBox1_MeasureItem(object sender, MeasureItemEventArgs e)
