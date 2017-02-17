@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GPS.Views
 {
-    public partial class AddCharacteristics: Form
+    public partial class AddCharacteristicDialog: Form
     {
-        public AddCharacteristics()
+        public AddCharacteristicDialog()
         {
             InitializeComponent();
         }

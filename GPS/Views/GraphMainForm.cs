@@ -18,5 +18,11 @@ namespace GPS.Views
         {
             InitializeComponent();
         }
+
+        private void addNodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var addNodeForm = new AddNodeDialog();
+            addNodeForm.ShowDialog();
+        }
     }
 }

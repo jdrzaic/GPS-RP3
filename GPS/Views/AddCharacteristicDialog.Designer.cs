@@ -1,6 +1,6 @@
 ﻿namespace GPS.Views
 {
-    partial class AddCharacteristics
+    partial class AddCharacteristicDialog
     {
         /// <summary>
         /// Required designer variable.

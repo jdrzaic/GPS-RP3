@@ -154,11 +154,26 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\AddCharacteristicDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddCharacteristicDialog.Designer.cs">
+      <DependentUpon>AddCharacteristicDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddNodeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddNodeDialog.Designer.cs">
+      <DependentUpon>AddNodeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\GraphMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\GraphMainForm.Designer.cs">
       <DependentUpon>GraphMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImageBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\LandingForm.cs">
       <SubType>Form</SubType>
@@ -168,6 +183,12 @@
     </Compile>
     <Compile Include="Views\LocationNodeButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\ShowCharacteristicsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ShowCharacteristicsForm.Designer.cs">
+      <DependentUpon>ShowCharacteristicsForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Migrations\201702171355439_initial.resx">
       <DependentUpon>201702171355439_initial.cs</DependentUpon>
@@ -182,11 +203,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <EmbeddedResource Include="Views\AddNodeDialog.resx">
+      <DependentUpon>AddNodeDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\GraphMainForm.resx">
       <DependentUpon>GraphMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LandingForm.resx">
       <DependentUpon>LandingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ShowCharacteristicsForm.resx">
+      <DependentUpon>ShowCharacteristicsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\packages.config" />

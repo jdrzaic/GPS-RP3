@@ -64,8 +64,9 @@
             // addNodeToolStripMenuItem
             // 
             this.addNodeToolStripMenuItem.Name = "addNodeToolStripMenuItem";
-            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addNodeToolStripMenuItem.Text = "Add Node";
+            this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
             // 
             // calculateToolStripMenuItem
             // 
