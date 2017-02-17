@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 
 namespace GPS
 {
@@ -20,6 +22,8 @@ namespace GPS
     [Table("Graph")]
     public class Graph<TNode, TEdge>
     {
+        [Key]
+        public int GraphId;
         public void LoadFromDb() { throw new NotImplementedException(); }
         public void SaveToDb() { throw new NotImplementedException(); }
 
