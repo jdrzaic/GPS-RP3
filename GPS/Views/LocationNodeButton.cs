@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace GPS.Views
 {
-    class LocationNodeButton : RadioButton
+    public class LocationNodeButton : RadioButton
     {
-        private GPSNode node;
+        public GPSNode node;
         public LocationNodeButton() : base()
         {
             this.Text = "";

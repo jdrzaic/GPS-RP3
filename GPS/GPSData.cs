@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace GPS
 {
-    enum NodeType
+    public enum NodeType
     {
         Store,
         PostOffice,
@@ -18,7 +18,7 @@ namespace GPS
     }
 
     [Table("GPSNode")]
-    class GPSNode : ILocated
+    public class GPSNode : ILocated
     {
         [Key]
         public int GPSNodeId { get; set; }
@@ -29,7 +29,7 @@ namespace GPS
     }
 
     [Table("GPSStreet")]
-    class GPSStreet
+    public class GPSStreet
     {
         [Key]
         public int GPSStreetId;

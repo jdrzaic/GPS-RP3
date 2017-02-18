@@ -154,17 +154,17 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\AddNodeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddNodeForm.Designer.cs">
+      <DependentUpon>AddNodeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddCharacteristicDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\AddCharacteristicDialog.Designer.cs">
       <DependentUpon>AddCharacteristicDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddNodeDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\AddNodeDialog.Designer.cs">
-      <DependentUpon>AddNodeDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\GraphMainForm.cs">
       <SubType>Form</SubType>
@@ -203,8 +203,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
-    <EmbeddedResource Include="Views\AddNodeDialog.resx">
-      <DependentUpon>AddNodeDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Views\AddCharacteristicDialog.resx">
+      <DependentUpon>AddCharacteristicDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddNodeForm.resx">
+      <DependentUpon>AddNodeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\GraphMainForm.resx">
       <DependentUpon>GraphMainForm.cs</DependentUpon>

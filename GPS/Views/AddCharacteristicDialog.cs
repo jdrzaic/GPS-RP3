@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace GPS.Views
 {
-    public partial class AddCharacteristicDialog: Form
+    public partial class AddCharacteristicDialog : Form
     {
         public AddCharacteristicDialog()
         {
             InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e) {}
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //store node
         }
     }
 }
