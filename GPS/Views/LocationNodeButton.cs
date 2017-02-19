@@ -15,12 +15,35 @@ namespace GPS.Views
         {
             this.Text = "";
             OuterColor = Color.Red;
-            InnerColor = Color.Red;
+            InnerColor = Color.Blue;
             this.AutoSize = false;
-            Font = new Font("Arial", 8.75F);
+            Font = new Font("Arial", 8);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
+            this.MouseClick += LocationNodeButton_MouseClick;
         }
+
+        private void LocationNodeButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+            if (me.Button == MouseButtons.Right)
+            {
+                // menu
+            }
+            else if (me.Button == MouseButtons.Left)
+            {
+                // checking if ctrl clicked
+                if (ModifierKeys.HasFlag(Keys.Control))
+                {
+
+                } else
+                {
+                    var basicForm = new NodeBasicForm();
+                    basicForm.ShowDialog();
+                }
+            }
+        }
+
         public Color InnerColor { get; set; }
         public Color OuterColor { get; set; }
 

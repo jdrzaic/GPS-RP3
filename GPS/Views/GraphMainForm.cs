@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,10 +31,15 @@ namespace GPS.Views
         public LocationNodeButton addButtonForNode(float x, float y) 
         {
             var newLocationButton = new LocationNodeButton();
-            newLocationButton.Location = new Point((int)x - newLocationButton.Width / 2, (int)y - newLocationButton.Height / 2);
+            Debug.WriteLine((int)x);
+            Debug.WriteLine((int)y);
+            Debug.WriteLine(newLocationButton.Size);
+            newLocationButton.Location = new Point((int)x - newLocationButton.Height / 2,
+                (int)y - newLocationButton.Height / 2 + this.menuStrip2.Height);
             this.Controls.Add(newLocationButton);
             return newLocationButton;
         }
+
         public void NodeCreated(string name, float xCoordinate, float yCoodrinate) {
             if (graph == null) return;
             var newNode = new GPSNode();
