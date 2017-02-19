@@ -184,6 +184,12 @@
     <Compile Include="Views\LocationNodeButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\NodeBasicForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\NodeBasicForm.Designer.cs">
+      <DependentUpon>NodeBasicForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\NodeDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LandingForm.resx">
       <DependentUpon>LandingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\NodeBasicForm.resx">
+      <DependentUpon>NodeBasicForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\NodeDetailForm.resx">
       <DependentUpon>NodeDetailForm.cs</DependentUpon>

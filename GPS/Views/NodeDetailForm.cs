@@ -22,6 +22,7 @@ namespace GPS.Views
 
         public void CustomizeComponent()
         {
+            if (node == null) return;
             this.listView1.View = View.Details;
             this.listView1.Columns.Add("Name         ");
             this.listView1.Columns.Add("Type         ");

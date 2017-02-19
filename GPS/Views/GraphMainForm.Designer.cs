@@ -31,12 +31,12 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cleanGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shortestPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shortestWithCriteriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cleanGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,9 +64,15 @@
             // addNodeToolStripMenuItem
             // 
             this.addNodeToolStripMenuItem.Name = "addNodeToolStripMenuItem";
-            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.addNodeToolStripMenuItem.Text = "Add Node";
             this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
+            // 
+            // cleanGraphToolStripMenuItem
+            // 
+            this.cleanGraphToolStripMenuItem.Name = "cleanGraphToolStripMenuItem";
+            this.cleanGraphToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.cleanGraphToolStripMenuItem.Text = "Clean Graph";
             // 
             // calculateToolStripMenuItem
             // 
@@ -102,12 +108,6 @@
             this.userManualToolStripMenuItem.Name = "userManualToolStripMenuItem";
             this.userManualToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.userManualToolStripMenuItem.Text = "User manual";
-            // 
-            // cleanGraphToolStripMenuItem
-            // 
-            this.cleanGraphToolStripMenuItem.Name = "cleanGraphToolStripMenuItem";
-            this.cleanGraphToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.cleanGraphToolStripMenuItem.Text = "Clean Graph";
             // 
             // GraphMainForm
             // 

@@ -19,6 +19,11 @@ namespace GPS.Views
         public GraphMainForm()
         {
             InitializeComponent();
+            CustomizeComponent();
+        }
+
+        public void CustomizeComponent()
+        {
         }
 
         private void addNodeToolStripMenuItem_Click(object sender, EventArgs e)

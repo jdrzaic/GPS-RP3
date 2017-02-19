@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace GPS.Views
 {
     public class LocationNodeButton : RadioButton
     {
-        public GPSNode node;
+        public GPSNode node { get; set; }
+        public GraphMainForm creator { get; set; }
+
         public LocationNodeButton() : base()
         {
             this.Text = "";
@@ -21,16 +24,18 @@ namespace GPS.Views
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
             this.MouseClick += LocationNodeButton_MouseClick;
+            ContextMenu menu = new ContextMenu();
+            menu.MenuItems.Add("Show node details");
+            menu.MenuItems.Add("Add characteristic");
+            menu.MenuItems.Add("Connect one way");
+            menu.MenuItems.Add("Connect both ways");
+            this.ContextMenu = menu;
         }
 
         private void LocationNodeButton_MouseClick(object sender, MouseEventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
-            if (me.Button == MouseButtons.Right)
-            {
-                // menu
-            }
-            else if (me.Button == MouseButtons.Left)
+            if (me.Button == MouseButtons.Left)
             {
                 // checking if ctrl clicked
                 if (ModifierKeys.HasFlag(Keys.Control))
