@@ -14,6 +14,7 @@ namespace GPS.Views
     public partial class GraphMainForm: Form
     {
         public int graphId;
+        public GPSNode lastSelectedNode = null;
         private GPSGraph graph = new GPSGraph();
 
         public GraphMainForm()
@@ -24,6 +25,7 @@ namespace GPS.Views
 
         public void CustomizeComponent()
         {
+            
         }
 
         private void addNodeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -36,9 +38,6 @@ namespace GPS.Views
         public LocationNodeButton addButtonForNode(float x, float y) 
         {
             var newLocationButton = new LocationNodeButton();
-            Debug.WriteLine((int)x);
-            Debug.WriteLine((int)y);
-            Debug.WriteLine(newLocationButton.Size);
             newLocationButton.Location = new Point((int)x - newLocationButton.Height / 2,
                 (int)y - newLocationButton.Height / 2 + this.menuStrip2.Height);
             this.Controls.Add(newLocationButton);
@@ -54,6 +53,19 @@ namespace GPS.Views
             newNode.AssociatedControl = locationButton;
             var node = graph.NewNode(newNode);
             locationButton.node = newNode;
+            locationButton.creator = this;
+        }
+
+        private void drawLineConnection(PointF point1, PointF point2)
+        {
+
+        }
+
+        public void createOneWayConnection(GPSNode node)
+        {
+            PointF origin = this.lastSelectedNode.Location;
+            PointF dest = this.lastSelectedNode.Location;
+            this.Refresh();
         }
     }
 }

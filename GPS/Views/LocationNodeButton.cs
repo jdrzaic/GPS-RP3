@@ -25,17 +25,57 @@ namespace GPS.Views
             BackColor = Color.Transparent;
             this.MouseClick += LocationNodeButton_MouseClick;
             ContextMenu menu = new ContextMenu();
-            menu.MenuItems.Add("Show node details");
-            menu.MenuItems.Add("Add characteristic");
-            menu.MenuItems.Add("Connect one way");
-            menu.MenuItems.Add("Connect both ways");
+            MenuItem itemShow = menu.MenuItems.Add("Show node details");
+            itemShow.Click += ItemShow_Click;
+            MenuItem itemAddCharacteristic = menu.MenuItems.Add("Add characteristic");
+            itemAddCharacteristic.Click += ItemAddCharacteristic_Click;
+            MenuItem itemConnectOne = menu.MenuItems.Add("Connect one way");
+            itemConnectOne.Click += ItemConnectOne_Click;
+            MenuItem itemConnectBoth = menu.MenuItems.Add("Connect both ways");
+            itemConnectBoth.Click += ItemConnectBoth_Click;
             this.ContextMenu = menu;
+        }
+
+        private void ItemConnectBoth_Click(object sender, EventArgs e)
+        {
+            if (this.creator.lastSelectedNode == null)
+            {
+                MessageBox.Show("No origin node is selected", "No node");
+                return;
+            } 
+        }
+
+        private void ItemConnectOne_Click(object sender, EventArgs e)
+        {
+            if (this.creator.lastSelectedNode == null)
+            {
+                MessageBox.Show("No origin node is selected", "No node");
+                return;
+            } 
+            
+        }
+
+        private void ItemAddCharacteristic_Click(object sender, EventArgs e)
+        {
+            var addCharacteristicDialog = new AddCharacteristicDialog();
+            addCharacteristicDialog.node = this.node;
+            addCharacteristicDialog.ShowDialog();
+        }
+
+        private void ItemShow_Click(object sender, EventArgs e)
+        {
+            var showDetailsDialog = new NodeDetailForm();
+            showDetailsDialog.node = this.node;
+            showDetailsDialog.ShowDialog(); 
         }
 
         private void LocationNodeButton_MouseClick(object sender, MouseEventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
-            if (me.Button == MouseButtons.Left)
+            if (me.Button == MouseButtons.Right)
+            {
+            }
+            else if (me.Button == MouseButtons.Left)
             {
                 // checking if ctrl clicked
                 if (ModifierKeys.HasFlag(Keys.Control))

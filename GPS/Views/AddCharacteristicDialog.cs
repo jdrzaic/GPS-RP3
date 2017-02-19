@@ -12,6 +12,7 @@ namespace GPS.Views
 {
     public partial class AddCharacteristicDialog : Form
     {
+        public GPSNode node { get; set; }
         public AddCharacteristicDialog()
         {
             InitializeComponent();
