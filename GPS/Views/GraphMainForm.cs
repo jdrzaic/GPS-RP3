@@ -72,6 +72,11 @@ namespace GPS.Views
         public void CreateOneWayConnection(GPSGraph.Node node)
         {
             GPSGraph.Node originNode = this.lastSelectedNode;
+            if(originNode.IsConnectedTo(node))
+            {
+                MessageBox.Show("Nodes are already connected");
+                return;
+            } 
             originNode.ConnectTo(new GPSStreet(), node);
             this.area.GraphChanged();
             this.nodeSelected = false;
@@ -81,28 +86,13 @@ namespace GPS.Views
         {
             GPSGraph.Node originNode = this.lastSelectedNode;
             GPSStreet street = null;
-            if (originNode.IsConnectedTo(node))
+            if (originNode.IsConnectedTo(node)) street = originNode.GetConnectionToNode(node);
+            if (street != null && node.IsConnectedTo(originNode))
             {
-                foreach (var connection in originNode.Connections)
-                {
-                    if (connection.Item1 == node)
-                    {
-                        street = connection.Item2;
-                        break;
-                    }
-                }
+                MessageBox.Show("Nodes are already connected both ways");
+                return;
             }
-            else if (street == null && node.IsConnectedTo(originNode))
-            {
-                foreach (var connection in node.Connections)
-                {
-                    if (connection.Item1 == originNode)
-                    {
-                        street = connection.Item2;
-                        break;
-                    }
-                }
-            }
+            if (node.IsConnectedTo(originNode)) street = node.GetConnectionToNode(originNode);
             if (street == null) street = new GPSStreet();
             originNode.ConnectBothWays(street, node);
             this.area.GraphChanged();

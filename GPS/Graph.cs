@@ -116,6 +116,18 @@ namespace GPS
                 other.ConnectTo(data, distance, this);
             }
 
+            public TEdge GetConnectionToNode(Node other)
+            {
+                foreach (var connection in this.Connections)
+                {
+                    if (connection.Item1 == other)
+                    {
+                        return connection.Item2;
+                    }
+                }
+                return default(TEdge);
+            } 
+
             /// <summary>
             /// Disconnect two nodes. They must belong to the same graph.
             /// </summary>
