@@ -31,18 +31,6 @@ namespace GPS.Views
             this.area = new DrawingArea(this.graph, this);
             this.area.Location = new Point(0, this.menuStrip2.Height);
             this.Controls.Add(this.area);
-            this.Paint += GraphMainForm_Paint;
-            this.area.Scroll += Area_Scroll;
-        }
-
-        private void Area_Scroll(object sender, ScrollEventArgs e)
-        {
-            this.menuStrip2.Location = new Point(0, 0);
-        }
-
-        private void GraphMainForm_Paint(object sender, PaintEventArgs e)
-        {
-            this.menuStrip2.Location = new Point(0, 0);
         }
 
         private void addNodeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,7 +42,7 @@ namespace GPS.Views
 
         private void cleanGraphToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.DbContext.Graphs.Remove(graph);
+            // Program.DbContext.Graphs.Remove(graph);
             this.graph = new GPSGraph();
             this.area.GraphCleared();
         }

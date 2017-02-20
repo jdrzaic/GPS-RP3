@@ -14,11 +14,13 @@ namespace GPS.Views
         public GPSGraph.Node node { get; set; }
         public GraphMainForm creator { get; set; }
 
-        public LocationNodeButton() : base()
+        public LocationNodeButton(Color outerColor, Color innerColor) : this(outerColor, innerColor, 24, 24) {}
+
+        public LocationNodeButton(Color outerColor, Color innerColor, int width, int height) : base()
         {
             this.Text = "";
-            OuterColor = Color.Red;
-            InnerColor = Color.Blue;
+            this.OuterColor = outerColor;
+            this.InnerColor = innerColor;
             this.AutoSize = false;
             Font = new Font("Arial", 8);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
@@ -99,10 +101,10 @@ namespace GPS.Views
             int diameter = ClientRectangle.Height - 1;
 
             RectangleF innerRect = new RectangleF(1F, 1F, diameter - 2, diameter - 2);
-            g.FillEllipse(new SolidBrush(Color.Red), innerRect);
+            g.FillEllipse(new SolidBrush(this.OuterColor), innerRect);
 
             Rectangle outerRect = new Rectangle(0, 0, diameter, diameter);
-            g.DrawEllipse(new Pen(OuterColor), outerRect);
+            g.DrawEllipse(new Pen(Color.Transparent), outerRect);
 
             if (Checked)
             {

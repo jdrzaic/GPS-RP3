@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace GPS.Views
 {
@@ -45,7 +46,7 @@ namespace GPS.Views
         public LocationNodeButton addButtonForNode(float x, float y, GPSGraph.Node node)
         {
             //change size if more than current
-            var newLocationButton = new LocationNodeButton();
+            var newLocationButton = new LocationNodeButton(Color.Blue, Color.DarkBlue);
             newLocationButton.Location = new Point((int)x,
                 (int)y);
             newLocationButton.node = node;
@@ -58,7 +59,35 @@ namespace GPS.Views
         {
             base.OnPaint(e);
             var graphics = e.Graphics;
-            // graphics.DrawLine(new Pen(Brushes.Aquamarine), new Point(10, 20), new Point(140, 150));
+            Pen pen = new Pen(Color.DarkBlue, 3);
+            var nodes = this.graph.Nodes;
+            foreach (var node in nodes)
+            {
+                DrawConnectionsForNode(node, pen, graphics);
+            }
+        }
+
+        private void DrawConnectionsForNode(GPSGraph.Node node, Pen p, Graphics g)
+        {
+            var connections = node.Connections;
+            var nodeSizeOffset = node.Data.AssociatedControl.Height / 2;
+            var originX = node.Data.Location.X + nodeSizeOffset;
+            var originY = node.Data.Location.Y + nodeSizeOffset;
+            foreach (var connection in connections)
+            {
+                var otherNode = connection.Item1;
+                var destX = otherNode.Data.Location.X + nodeSizeOffset;
+                var destY = otherNode.Data.Location.Y + nodeSizeOffset;
+                g.DrawLine(p, originX, originY, destX, destY);
+                var middlePoint = new Point((int)((destX + originX) / 2),
+                    (int)((destY + originY) / 2));
+                var twoThirdsPoint = new Point((int)((2 * destX + originX) / 3),
+                    (int)((2 * destY + originY) / 3));
+                p.CustomEndCap = new AdjustableArrowCap(4, 4);
+                g.DrawLine(p, middlePoint, twoThirdsPoint);
+                p.EndCap = LineCap.Flat;
+            }
+
         }
 
         private void drawLineConnection(PointF point1, PointF point2)
