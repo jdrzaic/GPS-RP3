@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace GPS.Views
 {
-    public partial class AddCharacteristicDialog : Form
+    public partial class AddNodeCharacteristicDialog : Form
     {
         public GPSGraph.Node node { get; set; }
-        public AddCharacteristicDialog(GPSGraph.Node node)
+        public AddNodeCharacteristicDialog(GPSGraph.Node node)
         {
             this.node = node;
             InitializeComponent();
@@ -23,7 +23,11 @@ namespace GPS.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //store node
+            var characteristic = new GPSCharacteristic();
+            characteristic.Name = this.textBox2.Text;
+            characteristic.Description = this.richTextBox1.Text;
+            node.Data.Characteristics.ToList().Add(characteristic);
+            Close();
         }
     }
 }

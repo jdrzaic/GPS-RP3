@@ -9,14 +9,14 @@ using System.Windows.Forms;
 
 namespace GPS.Views
 {
-    public class LocationNodeButton : RadioButton
+    public class LocationStreetButton : RadioButton
     {
         public GPSGraph.Node node { get; set; }
         public GraphMainForm creator { get; set; }
 
-        public LocationNodeButton(Color outerColor, Color innerColor) : this(outerColor, innerColor, 24, 24) {}
+        public LocationStreetButton(Color outerColor, Color innerColor) : this(outerColor, innerColor, 24, 24) { }
 
-        public LocationNodeButton(Color outerColor, Color innerColor, int width, int height) : base()
+        public LocationStreetButton(Color outerColor, Color innerColor, int width, int height) : base()
         {
             this.Text = "";
             this.OuterColor = outerColor;
@@ -27,35 +27,11 @@ namespace GPS.Views
             BackColor = Color.Transparent;
             this.MouseClick += LocationNodeButton_MouseClick;
             ContextMenu menu = new ContextMenu();
-            MenuItem itemShow = menu.MenuItems.Add("Show node details");
+            MenuItem itemShow = menu.MenuItems.Add("Show street details");
             itemShow.Click += ItemShow_Click;
             MenuItem itemAddCharacteristic = menu.MenuItems.Add("Add characteristic");
             itemAddCharacteristic.Click += ItemAddCharacteristic_Click;
-            MenuItem itemConnectOne = menu.MenuItems.Add("Connect one way");
-            itemConnectOne.Click += ItemConnectOne_Click;
-            MenuItem itemConnectBoth = menu.MenuItems.Add("Connect both ways");
-            itemConnectBoth.Click += ItemConnectBoth_Click;
             this.ContextMenu = menu;
-        }
-
-        private void ItemConnectBoth_Click(object sender, EventArgs e)
-        {
-            if (!this.creator.nodeSelected)
-            {
-                MessageBox.Show("No origin node is selected", "No node");
-                return;
-            }
-            this.creator.CreateBothWayConnection(this.node);
-        }
-
-        private void ItemConnectOne_Click(object sender, EventArgs e)
-        {
-            if (!this.creator.nodeSelected)
-            {
-                MessageBox.Show("No origin node is selected", "No node");
-                return;
-            }
-            this.creator.CreateOneWayConnection(this.node);
         }
 
         private void ItemAddCharacteristic_Click(object sender, EventArgs e)
@@ -67,7 +43,7 @@ namespace GPS.Views
         private void ItemShow_Click(object sender, EventArgs e)
         {
             var showDetailsDialog = new NodeDetailForm(node);
-            showDetailsDialog.ShowDialog(); 
+            showDetailsDialog.ShowDialog();
         }
 
         private void LocationNodeButton_MouseClick(object sender, MouseEventArgs e)
@@ -82,7 +58,8 @@ namespace GPS.Views
                 if (ModifierKeys.HasFlag(Keys.Control))
                 {
                     this.creator.SelectNode(this.node);
-                } else
+                }
+                else
                 {
                     var basicForm = new NodeBasicForm(this.node);
                     basicForm.ShowDialog();

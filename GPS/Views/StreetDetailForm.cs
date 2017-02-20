@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace GPS.Views
 {
-    public partial class NodeDetailForm : Form
+    public partial class StreetDetailForm : Form
     {
         public GPSGraph.Node node { get; set; }
-        public NodeDetailForm(GPSGraph.Node node) : base()
+        public StreetDetailForm(GPSGraph.Node node) : base()
         {
             this.node = node;
             InitializeComponent();
@@ -36,12 +36,7 @@ namespace GPS.Views
             this.textBox2.Enabled = false;
             this.textBox3.Text = "" + node.Data.Location.Y;
             this.textBox3.Enabled = false;
-            foreach (var characteristic in node.Data.Characteristics)
-            {
-                // change to get type 
-                var rowToAdd = new string[] { "", characteristic.Name, characteristic.Description };
-                this.listView1.Items.Add(new ListViewItem(rowToAdd));
-            }
+            // adding characteristics - requires changes in model
         }
 
         public void InitializeStaticProperties()

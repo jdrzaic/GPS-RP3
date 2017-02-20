@@ -36,6 +36,10 @@ namespace GPS
         public Control AssociatedControl { get; set; }
         public IEnumerable<GPSCharacteristic> Characteristics { get; set; }
         public string Name { get; set; }
+        public GPSNode()
+        {
+            Characteristics = new HashSet<GPSCharacteristic>();
+        }
     }
 
     [Table("GPSStreet")]
@@ -46,5 +50,9 @@ namespace GPS
         public Control AssociatedControl { get; set; }
         public IEnumerable<GPSCharacteristic> Characteristics { get; set; }
         public string Name { get; set; }
+        public GPSStreet()
+        {
+            Characteristics = new HashSet<GPSCharacteristic>();
+        }
     }
 }

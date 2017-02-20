@@ -160,11 +160,11 @@
     <Compile Include="Views\AddNodeForm.Designer.cs">
       <DependentUpon>AddNodeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddCharacteristicDialog.cs">
+    <Compile Include="Views\AddNodeCharacteristicDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\AddCharacteristicDialog.Designer.cs">
-      <DependentUpon>AddCharacteristicDialog.cs</DependentUpon>
+    <Compile Include="Views\AddNodeCharacteristicDialog.Designer.cs">
+      <DependentUpon>AddNodeCharacteristicDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\GraphMainForm.cs">
       <SubType>Form</SubType>
@@ -184,23 +184,32 @@
     <Compile Include="Views\LocationNodeButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\LocationStreetButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\StreetBasicForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\StreetBasicForm.Designer.cs">
+      <DependentUpon>StreetBasicForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\NodeBasicForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\NodeBasicForm.Designer.cs">
       <DependentUpon>NodeBasicForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\StreetDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\StreetDetailForm.Designer.cs">
+      <DependentUpon>StreetDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\NodeDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\NodeDetailForm.Designer.cs">
       <DependentUpon>NodeDetailForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ShowCharacteristicsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\ShowCharacteristicsForm.Designer.cs">
-      <DependentUpon>ShowCharacteristicsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\DrawingArea.cs">
       <SubType>Component</SubType>
@@ -221,8 +230,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
-    <EmbeddedResource Include="Views\AddCharacteristicDialog.resx">
-      <DependentUpon>AddCharacteristicDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Views\AddNodeCharacteristicDialog.resx">
+      <DependentUpon>AddNodeCharacteristicDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddNodeForm.resx">
       <DependentUpon>AddNodeForm.cs</DependentUpon>
@@ -233,14 +242,17 @@
     <EmbeddedResource Include="Views\LandingForm.resx">
       <DependentUpon>LandingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\StreetBasicForm.resx">
+      <DependentUpon>StreetBasicForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\NodeBasicForm.resx">
       <DependentUpon>NodeBasicForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\StreetDetailForm.resx">
+      <DependentUpon>StreetDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\NodeDetailForm.resx">
       <DependentUpon>NodeDetailForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\ShowCharacteristicsForm.resx">
-      <DependentUpon>ShowCharacteristicsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\packages.config" />

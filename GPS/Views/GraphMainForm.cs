@@ -42,7 +42,6 @@ namespace GPS.Views
 
         private void cleanGraphToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Program.DbContext.Graphs.Remove(graph);
             this.graph = new GPSGraph();
             this.area.GraphCleared();
         }
