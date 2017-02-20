@@ -202,6 +202,12 @@
     <Compile Include="Views\ShowCharacteristicsForm.Designer.cs">
       <DependentUpon>ShowCharacteristicsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\DrawingArea.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\DrawingArea.Designer.cs">
+      <DependentUpon>DrawingArea.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Migrations\201702171355439_initial.resx">
       <DependentUpon>201702171355439_initial.cs</DependentUpon>
     </EmbeddedResource>

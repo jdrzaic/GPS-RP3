@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GPS
 {
-    class GPSGraph : Graph<GPSNode, GPSStreet>
+    public class GPSGraph : Graph<GPSNode, GPSStreet>
     {
         [Key]
         public int GPSGraphId { get; set; }

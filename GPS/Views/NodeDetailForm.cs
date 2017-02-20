@@ -12,9 +12,10 @@ namespace GPS.Views
 {
     public partial class NodeDetailForm : Form
     {
-        public GPSNode node { get; set; }
-        public NodeDetailForm()
+        public GPSGraph.Node node { get; set; }
+        public NodeDetailForm(GPSGraph.Node node) : base()
         {
+            this.node = node;
             InitializeComponent();
             InitializeStaticProperties();
             CustomizeComponent();
@@ -29,9 +30,12 @@ namespace GPS.Views
             this.listView1.Columns.Add("Description                                                                             ");
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            this.label1.Text = node.Name;
-            this.label2.Text = "" + node.Location.X;
-            this.label3.Text = "" + node.Location.Y;
+            this.textBox1.Text = node.Data.Name;
+            this.textBox1.Enabled = false;
+            this.textBox2.Text = "" + node.Data.Location.X;
+            this.textBox2.Enabled = false;
+            this.textBox3.Text = "" + node.Data.Location.Y;
+            this.textBox3.Enabled = false;
             // adding characteristics - requires changes in model
         }
 

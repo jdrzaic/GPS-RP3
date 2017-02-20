@@ -11,7 +11,7 @@ namespace GPS.Views
 {
     public class LocationNodeButton : RadioButton
     {
-        public GPSNode node { get; set; }
+        public GPSGraph.Node node { get; set; }
         public GraphMainForm creator { get; set; }
 
         public LocationNodeButton() : base()
@@ -38,34 +38,33 @@ namespace GPS.Views
 
         private void ItemConnectBoth_Click(object sender, EventArgs e)
         {
-            if (this.creator.lastSelectedNode == null)
+            if (!this.creator.nodeSelected)
             {
                 MessageBox.Show("No origin node is selected", "No node");
                 return;
-            } 
+            }
+            this.creator.CreateBothWayConnection(this.node);
         }
 
         private void ItemConnectOne_Click(object sender, EventArgs e)
         {
-            if (this.creator.lastSelectedNode == null)
+            if (!this.creator.nodeSelected)
             {
                 MessageBox.Show("No origin node is selected", "No node");
                 return;
-            } 
-            
+            }
+            this.creator.CreateOneWayConnection(this.node);
         }
 
         private void ItemAddCharacteristic_Click(object sender, EventArgs e)
         {
-            var addCharacteristicDialog = new AddCharacteristicDialog();
-            addCharacteristicDialog.node = this.node;
+            var addCharacteristicDialog = new AddCharacteristicDialog(node);
             addCharacteristicDialog.ShowDialog();
         }
 
         private void ItemShow_Click(object sender, EventArgs e)
         {
-            var showDetailsDialog = new NodeDetailForm();
-            showDetailsDialog.node = this.node;
+            var showDetailsDialog = new NodeDetailForm(node);
             showDetailsDialog.ShowDialog(); 
         }
 
@@ -80,10 +79,10 @@ namespace GPS.Views
                 // checking if ctrl clicked
                 if (ModifierKeys.HasFlag(Keys.Control))
                 {
-
+                    this.creator.SelectNode(this.node);
                 } else
                 {
-                    var basicForm = new NodeBasicForm();
+                    var basicForm = new NodeBasicForm(this.node);
                     basicForm.ShowDialog();
                 }
             }

@@ -12,9 +12,10 @@ namespace GPS.Views
 {
     public partial class NodeBasicForm : Form
     {
-        public GPSNode node { get; set; }
-        public NodeBasicForm()
+        public GPSGraph.Node node { get; set; }
+        public NodeBasicForm(GPSGraph.Node node)
         {
+            this.node = node;
             InitializeComponent();
             CustomizeComponent();
         }
@@ -22,9 +23,12 @@ namespace GPS.Views
         public void CustomizeComponent()
         {
             if (node == null) return;
-            this.label1.Text = node.Name;
-            this.label2.Text = "" + node.Location.X;
-            this.label3.Text = "" + node.Location.Y;
+            this.textBox1.Text = node.Data.Name;
+            this.textBox1.Enabled = false;
+            this.textBox2.Text = "" + node.Data.Location.X;
+            this.textBox2.Enabled = false;
+            this.textBox3.Text = "" + node.Data.Location.Y;
+            this.textBox3.Enabled = false;
         }
     }
 }

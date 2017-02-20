@@ -64,15 +64,16 @@
             // addNodeToolStripMenuItem
             // 
             this.addNodeToolStripMenuItem.Name = "addNodeToolStripMenuItem";
-            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addNodeToolStripMenuItem.Text = "Add Node";
             this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
             // 
             // cleanGraphToolStripMenuItem
             // 
             this.cleanGraphToolStripMenuItem.Name = "cleanGraphToolStripMenuItem";
-            this.cleanGraphToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.cleanGraphToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cleanGraphToolStripMenuItem.Text = "Clean Graph";
+            this.cleanGraphToolStripMenuItem.Click += new System.EventHandler(this.cleanGraphToolStripMenuItem_Click);
             // 
             // calculateToolStripMenuItem
             // 

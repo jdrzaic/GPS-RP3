@@ -32,5 +32,11 @@ namespace GPS
                           Math.Pow(other.Data.Location.X - thisNode.Data.Location.X, 2)), 
                 other);
         }
+
+        public static void ConnectBothWays<TNode, TEdge>(this Graph<TNode, TEdge>.Node thisNode, TEdge data, Graph<TNode, TEdge>.Node other) where TNode : ILocated
+        {
+            ConnectTo(thisNode, data, other);
+            ConnectTo(other, data, thisNode);
+        }
     }
 }

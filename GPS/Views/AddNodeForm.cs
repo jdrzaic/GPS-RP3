@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,8 @@ namespace GPS.Views
         public void InitializeStaticProperties() {
             numericUpDown1.Minimum = 0;
             numericUpDown2.Minimum = 0;
+            numericUpDown1.Maximum = decimal.MaxValue;
+            numericUpDown2.Maximum = decimal.MaxValue;
             numericUpDown2.Increment = 1;
             numericUpDown1.Increment = 1;
         }

@@ -14,34 +14,49 @@ namespace GPS.Views
     public partial class GraphMainForm: Form
     {
         public int graphId;
-        public GPSNode lastSelectedNode = null;
-        private GPSGraph graph = new GPSGraph();
+        public bool nodeSelected = false;
+        public GPSGraph.Node lastSelectedNode;
+        private GPSGraph graph;
+        public DrawingArea area;
 
         public GraphMainForm()
         {
+            this.graph = new GPSGraph();
             InitializeComponent();
             CustomizeComponent();
         }
 
         public void CustomizeComponent()
         {
-            
+            this.area = new DrawingArea(this.graph, this);
+            this.area.Location = new Point(0, this.menuStrip2.Height);
+            this.Controls.Add(this.area);
+            this.Paint += GraphMainForm_Paint;
+            this.area.Scroll += Area_Scroll;
+        }
+
+        private void Area_Scroll(object sender, ScrollEventArgs e)
+        {
+            this.menuStrip2.Location = new Point(0, 0);
+        }
+
+        private void GraphMainForm_Paint(object sender, PaintEventArgs e)
+        {
+            this.menuStrip2.Location = new Point(0, 0);
         }
 
         private void addNodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var addNodeForm = new AddNodeForm();
             addNodeForm.creator = this;
-            addNodeForm.ShowDialog();
+;            addNodeForm.ShowDialog();
         }
-        
-        public LocationNodeButton addButtonForNode(float x, float y) 
+
+        private void cleanGraphToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var newLocationButton = new LocationNodeButton();
-            newLocationButton.Location = new Point((int)x - newLocationButton.Height / 2,
-                (int)y - newLocationButton.Height / 2 + this.menuStrip2.Height);
-            this.Controls.Add(newLocationButton);
-            return newLocationButton;
+            Program.DbContext.Graphs.Remove(graph);
+            this.graph = new GPSGraph();
+            this.area.GraphCleared();
         }
 
         public void NodeCreated(string name, float xCoordinate, float yCoodrinate) {
@@ -49,23 +64,55 @@ namespace GPS.Views
             var newNode = new GPSNode();
             newNode.Location = new PointF(xCoordinate, yCoodrinate);
             newNode.Name = name;
-            var locationButton = addButtonForNode(xCoordinate, yCoodrinate);
-            newNode.AssociatedControl = locationButton;
             var node = graph.NewNode(newNode);
-            locationButton.node = newNode;
-            locationButton.creator = this;
+            var locationButton = this.area.addButtonForNode(xCoordinate, yCoodrinate, node);
+            newNode.AssociatedControl = locationButton;
         }
 
-        private void drawLineConnection(PointF point1, PointF point2)
+        public void CreateOneWayConnection(GPSGraph.Node node)
         {
-
+            GPSGraph.Node originNode = this.lastSelectedNode;
+            originNode.ConnectTo(new GPSStreet(), node);
+            this.area.GraphChanged();
+            this.nodeSelected = false;
         }
 
-        public void createOneWayConnection(GPSNode node)
+        public void CreateBothWayConnection(GPSGraph.Node node)
         {
-            PointF origin = this.lastSelectedNode.Location;
-            PointF dest = this.lastSelectedNode.Location;
-            this.Refresh();
+            GPSGraph.Node originNode = this.lastSelectedNode;
+            GPSStreet street = null;
+            if (originNode.IsConnectedTo(node))
+            {
+                foreach (var connection in originNode.Connections)
+                {
+                    if (connection.Item1 == node)
+                    {
+                        street = connection.Item2;
+                        break;
+                    }
+                }
+            }
+            else if (street == null && node.IsConnectedTo(originNode))
+            {
+                foreach (var connection in node.Connections)
+                {
+                    if (connection.Item1 == originNode)
+                    {
+                        street = connection.Item2;
+                        break;
+                    }
+                }
+            }
+            if (street == null) street = new GPSStreet();
+            originNode.ConnectBothWays(street, node);
+            this.area.GraphChanged();
+            this.nodeSelected = false;
+        }
+
+        public void SelectNode(GPSGraph.Node node)
+        {
+            this.nodeSelected = true;
+            this.lastSelectedNode = node;
         }
     }
 }
