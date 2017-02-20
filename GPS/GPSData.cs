@@ -17,6 +17,16 @@ namespace GPS
         GasStation
     }
 
+    [Table("GPSItemCharacteristic")]
+    public class GPSCharacteristic
+    {
+        [Key]
+        public int GPSCharacteristicId { get; set; }
+        public NodeType NodeType { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
+
     [Table("GPSNode")]
     public class GPSNode : ILocated
     {
@@ -24,7 +34,7 @@ namespace GPS
         public int GPSNodeId { get; set; }
         public PointF Location { get; set; }
         public Control AssociatedControl { get; set; }
-        public NodeType NodeType { get; set; }
+        public IEnumerable<GPSCharacteristic> Characteristics { get; set; }
         public string Name { get; set; }
     }
 
@@ -34,6 +44,7 @@ namespace GPS
         [Key]
         public int GPSStreetId;
         public Control AssociatedControl { get; set; }
+        public IEnumerable<GPSCharacteristic> Characteristics { get; set; }
         public string Name { get; set; }
     }
 }
