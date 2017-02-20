@@ -34,11 +34,11 @@ namespace GPS
         public int GPSNodeId { get; set; }
         public PointF Location { get; set; }
         public Control AssociatedControl { get; set; }
-        public IEnumerable<GPSCharacteristic> Characteristics { get; set; }
+        public List<GPSCharacteristic> Characteristics { get; set; }
         public string Name { get; set; }
         public GPSNode()
         {
-            Characteristics = new HashSet<GPSCharacteristic>();
+            Characteristics = new List<GPSCharacteristic>();
         }
     }
 
@@ -48,11 +48,11 @@ namespace GPS
         [Key]
         public int GPSStreetId;
         public Control AssociatedControl { get; set; }
-        public IEnumerable<GPSCharacteristic> Characteristics { get; set; }
+        public List<GPSCharacteristic> Characteristics { get; set; }
         public string Name { get; set; }
         public GPSStreet()
         {
-            Characteristics = new HashSet<GPSCharacteristic>();
+            Characteristics = new List<GPSCharacteristic>();
         }
     }
 }

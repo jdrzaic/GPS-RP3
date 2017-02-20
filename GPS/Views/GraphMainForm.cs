@@ -63,10 +63,25 @@ namespace GPS.Views
             {
                 MessageBox.Show("Nodes are already connected");
                 return;
-            } 
-            originNode.ConnectTo(new GPSStreet(), node);
+            }
+            var street = new GPSStreet();
+            originNode.ConnectTo(street, node);
+            var addStreetNameForm = new AddStreetNameForm(street);
+            addStreetNameForm.ShowDialog();
             this.area.GraphChanged();
             this.nodeSelected = false;
+            createStreetButton(originNode, node, street);
+        }
+
+        public void createStreetButton(GPSGraph.Node node1, GPSGraph.Node node2, GPSStreet street) 
+        {
+            var button = new LocationStreetButton(Color.Red, Color.OrangeRed, 16, 16);
+            var middleX = (int)(node1.Data.Location.X + node2.Data.Location.X) / 2 + 8;
+            var middleY = (int)(node1.Data.Location.Y + node2.Data.Location.Y) / 2 + 8; 
+            button.Location = new Point(middleX, middleY);
+            button.street = street;
+            button.creator = this;
+            this.area.Controls.Add(button);
         }
 
         public void CreateBothWayConnection(GPSGraph.Node node)
@@ -80,7 +95,11 @@ namespace GPS.Views
                 return;
             }
             if (node.IsConnectedTo(originNode)) street = node.GetConnectionToNode(originNode);
-            if (street == null) street = new GPSStreet();
+            if (street == null)
+            {
+                street = new GPSStreet();
+                createStreetButton(originNode, node, street);
+            }
             originNode.ConnectBothWays(street, node);
             this.area.GraphChanged();
             this.nodeSelected = false;

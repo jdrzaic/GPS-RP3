@@ -12,10 +12,10 @@ namespace GPS.Views
 {
     public partial class StreetDetailForm : Form
     {
-        public GPSGraph.Node node { get; set; }
-        public StreetDetailForm(GPSGraph.Node node) : base()
+        public GPSStreet street { get; set; }
+        public StreetDetailForm(GPSStreet street) : base()
         {
-            this.node = node;
+            this.street = street;
             InitializeComponent();
             InitializeStaticProperties();
             CustomizeComponent();
@@ -23,20 +23,21 @@ namespace GPS.Views
 
         public void CustomizeComponent()
         {
-            if (node == null) return;
+            if (street == null) return;
             this.listView1.View = View.Details;
             this.listView1.Columns.Add("Name         ");
             this.listView1.Columns.Add("Type         ");
             this.listView1.Columns.Add("Description                                                                             ");
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            this.textBox1.Text = node.Data.Name;
+            this.textBox1.Text = street.Name;
             this.textBox1.Enabled = false;
-            this.textBox2.Text = "" + node.Data.Location.X;
-            this.textBox2.Enabled = false;
-            this.textBox3.Text = "" + node.Data.Location.Y;
-            this.textBox3.Enabled = false;
-            // adding characteristics - requires changes in model
+            foreach (var characteristic in street.Characteristics)
+            {
+                // change to get type 
+                var rowToAdd = new string[] { characteristic.Name, "", characteristic.Description };
+                this.listView1.Items.Add(new ListViewItem(rowToAdd));
+            }
         }
 
         public void InitializeStaticProperties()

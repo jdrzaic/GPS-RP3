@@ -81,11 +81,13 @@ namespace GPS.Views
                 g.DrawLine(p, originX, originY, destX, destY);
                 var middlePoint = new Point((int)((destX + originX) / 2),
                     (int)((destY + originY) / 2));
-                var twoThirdsPoint = new Point((int)((2 * destX + originX) / 3),
-                    (int)((2 * destY + originY) / 3));
+                var twoThirdsPoint = new Point((int)((3 * destX + originX) / 4),
+                    (int)((3 * destY + originY) / 4));
                 p.CustomEndCap = new AdjustableArrowCap(4, 4);
                 g.DrawLine(p, middlePoint, twoThirdsPoint);
                 p.EndCap = LineCap.Flat;
+                //add button so that details can be shown and characteristics added
+             
             }
 
         }

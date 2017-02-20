@@ -18,6 +18,7 @@ namespace GPS.Views
 
         public LocationNodeButton(Color outerColor, Color innerColor, int width, int height) : base()
         {
+            this.Size = new Size(width, height);
             this.Text = "";
             this.OuterColor = outerColor;
             this.InnerColor = innerColor;

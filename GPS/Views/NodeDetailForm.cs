@@ -39,7 +39,7 @@ namespace GPS.Views
             foreach (var characteristic in node.Data.Characteristics)
             {
                 // change to get type 
-                var rowToAdd = new string[] { "", characteristic.Name, characteristic.Description };
+                var rowToAdd = new string[] { characteristic.Name, "", characteristic.Description };
                 this.listView1.Items.Add(new ListViewItem(rowToAdd));
             }
         }

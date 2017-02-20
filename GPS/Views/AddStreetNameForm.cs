@@ -10,21 +10,19 @@ using System.Windows.Forms;
 
 namespace GPS.Views
 {
-    public partial class StreetBasicForm : Form
+    public partial class AddStreetNameForm : Form
     {
         public GPSStreet street { get; set; }
-        public StreetBasicForm(GPSStreet street)
+        public AddStreetNameForm(GPSStreet street)
         {
             this.street = street;
             InitializeComponent();
-            CustomizeComponent();
         }
 
-        public void CustomizeComponent()
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (street == null) return;
-            this.textBox1.Text = street.Name;
-            this.textBox1.Enabled = false;
+            street.Name = this.textBox1.Text;
+            Close();
         }
     }
 }

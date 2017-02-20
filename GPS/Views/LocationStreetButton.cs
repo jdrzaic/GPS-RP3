@@ -11,13 +11,14 @@ namespace GPS.Views
 {
     public class LocationStreetButton : RadioButton
     {
-        public GPSGraph.Node node { get; set; }
+        public GPSStreet street { get; set; }
         public GraphMainForm creator { get; set; }
 
         public LocationStreetButton(Color outerColor, Color innerColor) : this(outerColor, innerColor, 24, 24) { }
 
         public LocationStreetButton(Color outerColor, Color innerColor, int width, int height) : base()
         {
+            this.Size = new Size(width, height);
             this.Text = "";
             this.OuterColor = outerColor;
             this.InnerColor = innerColor;
@@ -36,13 +37,13 @@ namespace GPS.Views
 
         private void ItemAddCharacteristic_Click(object sender, EventArgs e)
         {
-            var addCharacteristicDialog = new AddNodeCharacteristicDialog(node);
+            var addCharacteristicDialog = new AddStreetCharacteristicDialog(street);
             addCharacteristicDialog.ShowDialog();
         }
 
         private void ItemShow_Click(object sender, EventArgs e)
         {
-            var showDetailsDialog = new NodeDetailForm(node);
+            var showDetailsDialog = new StreetDetailForm(street);
             showDetailsDialog.ShowDialog();
         }
 
@@ -54,16 +55,8 @@ namespace GPS.Views
             }
             else if (me.Button == MouseButtons.Left)
             {
-                // checking if ctrl clicked
-                if (ModifierKeys.HasFlag(Keys.Control))
-                {
-                    this.creator.SelectNode(this.node);
-                }
-                else
-                {
-                    var basicForm = new NodeBasicForm(this.node);
-                    basicForm.ShowDialog();
-                }
+                var basicForm = new StreetBasicForm(street);
+                basicForm.ShowDialog();
             }
         }
 
