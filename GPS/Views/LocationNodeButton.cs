@@ -36,7 +36,21 @@ namespace GPS.Views
             itemConnectOne.Click += ItemConnectOne_Click;
             MenuItem itemConnectBoth = menu.MenuItems.Add("Connect both ways");
             itemConnectBoth.Click += ItemConnectBoth_Click;
+            MenuItem itemFindShortestWithCriteria = menu.MenuItems.Add("Find shortest path with criteria");
+            itemFindShortestWithCriteria.Click += ItemFindShortestWithCriteria_Click;
+            MenuItem itemFindShortest = menu.MenuItems.Add("Find shortest path");
+            itemFindShortest.Click += ItemFindShortest_Click;
             this.ContextMenu = menu;
+        }
+
+        private void ItemFindShortest_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ItemFindShortestWithCriteria_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void ItemConnectBoth_Click(object sender, EventArgs e)
