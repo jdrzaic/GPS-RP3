@@ -17,6 +17,17 @@ namespace GPS.Views
         {
             this.node = node;
             InitializeComponent();
+            CustomizeComponent();
+        }
+
+        public void CustomizeComponent()
+        {
+            var typeValues = Enum.GetValues(typeof(NodeType));
+            foreach (var value in typeValues)
+            {
+                this.comboBox1.Items.Add(value.ToString());
+            }
+            this.comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void label1_Click(object sender, EventArgs e) {}
@@ -24,7 +35,8 @@ namespace GPS.Views
         private void button1_Click(object sender, EventArgs e)
         {
             var characteristic = new GPSCharacteristic();
-            characteristic.Name = this.textBox2.Text;
+            characteristic.NodeType = (NodeType)Enum.Parse(typeof(NodeType), this.comboBox1.Text);
+            characteristic.Name = this.textBox1.Text;
             characteristic.Description = this.richTextBox1.Text;
             node.Data.Characteristics.Add(characteristic);
             Close();

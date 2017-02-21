@@ -14,6 +14,7 @@ namespace GPS.Views
     public partial class DrawingArea : Panel
     {
         private GPSGraph graph;
+        public IEnumerable<Tuple<GPSStreet, GPSGraph.Node>> highlighted { get; set; }
         public GraphMainForm creator { get; set; }
         public DrawingArea(GPSGraph graph, Form creator) : base()
         {
@@ -65,6 +66,16 @@ namespace GPS.Views
             {
                 DrawConnectionsForNode(node, pen, graphics);
             }
+            HandleHighlighted();
+        }
+
+        private void HandleHighlighted()
+        {
+            var current = this.creator.lastSelectedNode;
+            foreach (var connection in this.highlighted)
+            {
+
+            }
         }
 
         private void DrawConnectionsForNode(GPSGraph.Node node, Pen p, Graphics g)
@@ -86,15 +97,7 @@ namespace GPS.Views
                 p.CustomEndCap = new AdjustableArrowCap(4, 4);
                 g.DrawLine(p, middlePoint, twoThirdsPoint);
                 p.EndCap = LineCap.Flat;
-                //add button so that details can be shown and characteristics added
-             
             }
-
-        }
-
-        private void drawLineConnection(PointF point1, PointF point2)
-        {
-
         }
     }
 }

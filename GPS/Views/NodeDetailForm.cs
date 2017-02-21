@@ -30,6 +30,7 @@ namespace GPS.Views
             this.listView1.Columns.Add("Description                                                                             ");
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            this.listView1.Columns[0].Width = -2;
             this.textBox1.Text = node.Data.Name;
             this.textBox1.Enabled = false;
             this.textBox2.Text = "" + node.Data.Location.X;
@@ -39,7 +40,8 @@ namespace GPS.Views
             foreach (var characteristic in node.Data.Characteristics)
             {
                 // change to get type 
-                var rowToAdd = new string[] { characteristic.Name, "", characteristic.Description };
+                var rowToAdd = new string[] { characteristic.Name, characteristic.NodeType.ToString(),
+                    characteristic.Description };
                 this.listView1.Items.Add(new ListViewItem(rowToAdd));
             }
         }

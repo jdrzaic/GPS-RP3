@@ -35,7 +35,8 @@ namespace GPS.Views
             foreach (var characteristic in street.Characteristics)
             {
                 // change to get type 
-                var rowToAdd = new string[] { characteristic.Name, "", characteristic.Description };
+                var rowToAdd = new string[] { characteristic.Name, characteristic.NodeType.ToString(),
+                    characteristic.Description };
                 this.listView1.Items.Add(new ListViewItem(rowToAdd));
             }
         }

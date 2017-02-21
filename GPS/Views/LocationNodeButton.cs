@@ -45,32 +45,38 @@ namespace GPS.Views
 
         private void ItemFindShortest_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (!CheckNodeSelected()) return;
+            this.creator.CalculateShortestPath(this.node);
         }
 
         private void ItemFindShortestWithCriteria_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (!CheckNodeSelected()) return;
+            //create dialog for criteria
+            //this.creator.CalculateShortestPathWithCriteria(this.node);
+
         }
 
         private void ItemConnectBoth_Click(object sender, EventArgs e)
         {
-            if (!this.creator.nodeSelected)
-            {
-                MessageBox.Show("No origin node is selected", "No node");
-                return;
-            }
+            if (!CheckNodeSelected()) return;
             this.creator.CreateBothWayConnection(this.node);
         }
 
         private void ItemConnectOne_Click(object sender, EventArgs e)
         {
+            if (!CheckNodeSelected()) return;
+            this.creator.CreateOneWayConnection(this.node);
+        }
+
+        private bool CheckNodeSelected()
+        {
             if (!this.creator.nodeSelected)
             {
                 MessageBox.Show("No origin node is selected", "No node");
-                return;
+                return false;
             }
-            this.creator.CreateOneWayConnection(this.node);
+            return true;
         }
 
         private void ItemAddCharacteristic_Click(object sender, EventArgs e)

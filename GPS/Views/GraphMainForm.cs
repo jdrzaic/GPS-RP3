@@ -101,6 +101,8 @@ namespace GPS.Views
                 createStreetButton(originNode, node, street);
             }
             originNode.ConnectBothWays(street, node);
+            var addStreetNameForm = new AddStreetNameForm(street);
+            addStreetNameForm.ShowDialog();
             this.area.GraphChanged();
             this.nodeSelected = false;
         }
@@ -109,6 +111,44 @@ namespace GPS.Views
         {
             this.nodeSelected = true;
             this.lastSelectedNode = node;
+        }
+
+        public void CalculateShortestPath(GPSGraph.Node node)
+        {
+            this.area.highlighted = this.lastSelectedNode.GetBestPath(node,
+                new List<Predicate<GPSNode>>());
+            this.area.GraphChanged();
+        }
+
+        public void CalculateShortestPathWithCriteria(GPSGraph.Node node, Tuple<List<String>, List<String>> criteria)
+        {
+            var criteriaPredicates = new List<Predicate<GPSNode>>();
+            var types = criteria.Item1;
+            var names = criteria.Item2;
+            foreach (var name in names) {
+                Predicate<GPSNode> namePredicate = delegate (GPSNode g)
+                {
+                    foreach (var c in g.Characteristics)
+                    {
+                        if (c.Name == name) return true;
+                    }
+                    return false;
+                };
+                criteriaPredicates.Add(namePredicate);
+            }
+            foreach (var type in types)
+            {
+                Predicate<GPSNode> typePredicate = delegate (GPSNode g)
+                {
+                    foreach (var c in g.Characteristics)
+                    {
+                        if (c.NodeType.ToString() == type) return true;
+                    }
+                    return false;
+                };
+                criteriaPredicates.Add(typePredicate);
+            }
+            this.area.highlighted = this.lastSelectedNode.GetBestPath(node, criteriaPredicates);
         }
     }
 }
