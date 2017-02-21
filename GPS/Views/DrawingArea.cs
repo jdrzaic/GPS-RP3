@@ -20,6 +20,7 @@ namespace GPS.Views
         {
             this.creator = (GraphMainForm)creator;
             this.graph = graph;
+            this.highlighted = new List<Tuple<GPSStreet, GPSGraph.Node>>();
             InitializeComponent();
             CustomizeComponent();
         }
@@ -66,15 +67,23 @@ namespace GPS.Views
             {
                 DrawConnectionsForNode(node, pen, graphics);
             }
-            HandleHighlighted();
+            pen.Color = Color.Red;
+            if (this.creator.calculatingPath) HandleHighlighted(pen, graphics);
         }
 
-        private void HandleHighlighted()
+        private void HandleHighlighted(Pen p, Graphics g)
         {
             var current = this.creator.lastSelectedNode;
+            var nodeSizeOffset = current.Data.AssociatedControl.Height / 2;
             foreach (var connection in this.highlighted)
             {
-
+                var originX = current.Data.Location.X + nodeSizeOffset;
+                var originY = current.Data.Location.Y + nodeSizeOffset;
+                var otherNode = connection.Item2;
+                var destX = otherNode.Data.Location.X + nodeSizeOffset;
+                var destY = otherNode.Data.Location.Y + nodeSizeOffset;
+                DrawArrowLine(originX, originY, destX, destY, g, p);
+                current = otherNode;
             }
         }
 
@@ -89,15 +98,21 @@ namespace GPS.Views
                 var otherNode = connection.Item1;
                 var destX = otherNode.Data.Location.X + nodeSizeOffset;
                 var destY = otherNode.Data.Location.Y + nodeSizeOffset;
-                g.DrawLine(p, originX, originY, destX, destY);
-                var middlePoint = new Point((int)((destX + originX) / 2),
-                    (int)((destY + originY) / 2));
-                var twoThirdsPoint = new Point((int)((3 * destX + originX) / 4),
-                    (int)((3 * destY + originY) / 4));
-                p.CustomEndCap = new AdjustableArrowCap(4, 4);
-                g.DrawLine(p, middlePoint, twoThirdsPoint);
-                p.EndCap = LineCap.Flat;
+                DrawArrowLine(originX, originY, destX, destY, g, p);
             }
+        }
+
+        private void DrawArrowLine(float originX, float originY, float destX, float destY,
+            Graphics g, Pen p) {
+            g.DrawLine(p, originX, originY, destX, destY);
+            var middlePoint = new Point((int)((destX + originX) / 2),
+                (int)((destY + originY) / 2));
+            var twoThirdsPoint = new Point((int)((3 * destX + originX) / 4),
+                (int)((3 * destY + originY) / 4));
+            p.CustomEndCap = new AdjustableArrowCap(4, 4);
+            g.DrawLine(p, middlePoint, twoThirdsPoint);
+            p.EndCap = LineCap.Flat;
         }
     }
 }
+

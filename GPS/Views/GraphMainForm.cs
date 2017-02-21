@@ -18,6 +18,7 @@ namespace GPS.Views
         public GPSGraph.Node lastSelectedNode;
         private GPSGraph graph;
         public DrawingArea area;
+        public bool calculatingPath = false;
 
         public GraphMainForm()
         {
@@ -117,7 +118,9 @@ namespace GPS.Views
         {
             this.area.highlighted = this.lastSelectedNode.GetBestPath(node,
                 new List<Predicate<GPSNode>>());
+            this.calculatingPath = true;
             this.area.GraphChanged();
+            this.calculatingPath = false;
         }
 
         public void CalculateShortestPathWithCriteria(GPSGraph.Node node, Tuple<List<String>, List<String>> criteria)
@@ -149,6 +152,9 @@ namespace GPS.Views
                 criteriaPredicates.Add(typePredicate);
             }
             this.area.highlighted = this.lastSelectedNode.GetBestPath(node, criteriaPredicates);
+            this.calculatingPath = true;
+            this.area.GraphChanged();
+            this.calculatingPath = false;
         }
     }
 }
