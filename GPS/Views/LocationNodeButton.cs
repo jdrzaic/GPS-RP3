@@ -40,7 +40,21 @@ namespace GPS.Views
             itemFindShortestWithCriteria.Click += ItemFindShortestWithCriteria_Click;
             MenuItem itemFindShortest = menu.MenuItems.Add("Find shortest path");
             itemFindShortest.Click += ItemFindShortest_Click;
+            MenuItem itemFromExisting = menu.MenuItems.Add("Create node from selected");
+            itemFromExisting.Click += ItemFromExisting_Click;
             this.ContextMenu = menu;
+        }
+
+        private void ItemFromExisting_Click(object sender, EventArgs e)
+        {
+            if (!CheckNodeSelected()) return;
+            var addFromExisting = new CreateItemFromExisting(this);
+            addFromExisting.ShowDialog();
+        }
+
+        public void ItemFromExistingCallback(float d13, float d23)
+        {
+            this.creator.AddItemFromExisting(this.node, d13, d23);
         }
 
         private void ItemFindShortest_Click(object sender, EventArgs e)

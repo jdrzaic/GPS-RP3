@@ -127,6 +127,13 @@ namespace GPS.Views
             this.calculatingPath = false;
         }
 
+        public void AddItemFromExisting(GPSGraph.Node n2, float d13, float d23)
+        {
+            var n1 = this.lastSelectedNode;
+            var d12 = Math.Sqrt(Math.Pow(n2.Data.Location.X - n1.Data.Location.X, 2) + Math.Pow(
+                n2.Data.Location.Y - n1.Data.Location.Y, 2));
+        }
+
         public void CalculateShortestPathWithCriteria(GPSGraph.Node node, Tuple<List<String>, List<String>> criteria)
         {
             var criteriaPredicates = new List<Predicate<GPSNode>>();
