@@ -82,8 +82,8 @@ namespace GPS.Views
         public void createStreetButton(GPSGraph.Node node1, GPSGraph.Node node2, GPSStreet street) 
         {
             var button = new LocationStreetButton(Color.Red, Color.OrangeRed, 16, 16);
-            var middleX = (int)(node1.Data.Location.X + node2.Data.Location.X) / 2 + 8;
-            var middleY = (int)(node1.Data.Location.Y + node2.Data.Location.Y) / 2 + 8; 
+            var middleX = (int)(node1.Data.Location.X + node2.Data.Location.X) / 2 + node1.Data.AssociatedControl.Height / 2 - 8;
+            var middleY = (int)(node1.Data.Location.Y + node2.Data.Location.Y) / 2 + node1.Data.AssociatedControl.Height / 2 - 8; 
             button.Location = new Point(middleX, middleY);
             button.street = street;
             button.creator = this;

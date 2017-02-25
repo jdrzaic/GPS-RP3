@@ -29,6 +29,7 @@ namespace GPS.Views
             var entities = Program.DbContext.Graphs;
             foreach (var entity in entities)
             {
+                if (entity.graphName != "Varaždin" && entity.graphName != "Zagreb" && entity.graphName != "Rijeka") continue;
                 var name = entity.graphName;
                 if (name == null || name.Trim() == "") continue;
                 if (this.GraphsInfo.ContainsKey(name)) continue;
