@@ -32,8 +32,8 @@ namespace GPS.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var fromFirst = this.numericUpDown1.Value;
-            var fromSecond = this.numericUpDown2.Value;
+            var fromFirst = (float)this.numericUpDown1.Value;
+            var fromSecond = (float)this.numericUpDown2.Value;
             this.creator.ItemFromExistingCallback(fromFirst, fromSecond);
             Close();
         }
