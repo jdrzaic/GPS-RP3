@@ -95,6 +95,7 @@ namespace GPS.Views
 
         private void HandleEdgesToShow(Pen p, Graphics g)
         {
+            p.Color = Color.Green;
             foreach (var node in graph.Nodes)
             {
                 foreach (var connection in node.Connections)
@@ -112,6 +113,7 @@ namespace GPS.Views
                     }
                 }
             }
+            p.Color = Color.Red;
         }
 
         private bool CheckSatisfiesCriteria(List<GPSCharacteristic> characteristics)
