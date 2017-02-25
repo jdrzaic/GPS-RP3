@@ -75,9 +75,15 @@ namespace GPS.Views
 
         private void HandleItemsToShow(Pen p, Graphics g)
         {
+            HandleNodesToShow();
+            HandleEdgesToShow(p, g);
+        }
+
+        private void HandleNodesToShow()
+        {
             foreach (var node in graph.Nodes)
             {
-                if (CheckSatisfiesCriteria(node))
+                if (CheckSatisfiesCriteria(node.Data.Characteristics))
                 {
                     var button = (LocationNodeButton)node.Data.AssociatedControl;
                     button.InnerColor = Color.Green;
@@ -87,7 +93,28 @@ namespace GPS.Views
             }
         }
 
-        private bool CheckSatisfiesCriteria(GPSGraph.Node node)
+        private void HandleEdgesToShow(Pen p, Graphics g)
+        {
+            foreach (var node in graph.Nodes)
+            {
+                foreach (var connection in node.Connections)
+                {
+                    var street = connection.Item2;
+                    if (CheckSatisfiesCriteria(street.Characteristics))
+                    {
+                        var origin = node;
+                        var dest = connection.Item1;
+                        var origX = origin.Data.Location.X + origin.Data.AssociatedControl.Height / 2;
+                        var origY = origin.Data.Location.Y + origin.Data.AssociatedControl.Height / 2;
+                        var destX = dest.Data.Location.X + dest.Data.AssociatedControl.Height / 2;
+                        var destY = dest.Data.Location.Y + dest.Data.AssociatedControl.Height / 2;
+                        DrawArrowLine(origX, origY, destX, destY, g, p);
+                    }
+                }
+            }
+        }
+
+        private bool CheckSatisfiesCriteria(List<GPSCharacteristic> characteristics)
         {;
             var types = itemsToShow.Item1;
             var names = itemsToShow.Item2;
@@ -95,7 +122,7 @@ namespace GPS.Views
             foreach (var type in types)
             {
                 var foundType = false;
-                foreach (var characteristic in node.Data.Characteristics)
+                foreach (var characteristic in characteristics)
                 {
                     if (characteristic.NodeType == (NodeType)Enum.Parse(
                         typeof(NodeType), type))
@@ -109,7 +136,7 @@ namespace GPS.Views
             foreach (var name in names)
             {
                 var foundName = false;
-                foreach (var characteristic in node.Data.Characteristics)
+                foreach (var characteristic in characteristics)
                 {
                     if (characteristic.Name == name)
                     {
