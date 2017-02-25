@@ -58,6 +58,7 @@ namespace GPS.Views
             var node = graph.NewNode(newNode);
             var locationButton = this.area.addButtonForNode(xCoordinate, yCoodrinate, node);
             newNode.AssociatedControl = locationButton;
+            this.area.SetSize(xCoordinate, yCoodrinate);
         }
 
         public void CreateOneWayConnection(GPSGraph.Node node)
@@ -106,9 +107,10 @@ namespace GPS.Views
                 createStreetButton(originNode, node, street);
             }
             originNode.ConnectBothWays(street, node);
+            this.area.GraphChanged();
+            System.Threading.Thread.Sleep(500);
             var addStreetNameForm = new AddStreetNameForm(street);
             addStreetNameForm.ShowDialog();
-            this.area.GraphChanged();
             this.nodeSelected = false;
         }
 
@@ -120,11 +122,21 @@ namespace GPS.Views
 
         public void CalculateShortestPath(GPSGraph.Node node)
         {
-            this.area.highlighted = this.lastSelectedNode.GetBestPath(node,
-                new List<Predicate<GPSNode>>());
-            this.calculatingPath = true;
-            this.area.GraphChanged();
-            this.calculatingPath = false;
+            try
+            { 
+                this.area.highlighted = this.lastSelectedNode.GetBestPath(node,
+                    new List<Predicate<GPSNode>>());
+                if (this.area.highlighted.Count() == 0)
+                {
+                    MessageBox.Show("No available routes");
+                }
+                this.calculatingPath = true;
+                this.area.GraphChanged();
+                this.calculatingPath = false;
+            } catch(Exception ex)
+            {
+                MessageBox.Show("No available routes");
+            }
         }
 
         public void AddItemFromExisting(GPSGraph.Node n2, float d13, float d23)
@@ -132,6 +144,26 @@ namespace GPS.Views
             var n1 = this.lastSelectedNode;
             var d12 = Math.Sqrt(Math.Pow(n2.Data.Location.X - n1.Data.Location.X, 2) + Math.Pow(
                 n2.Data.Location.Y - n1.Data.Location.Y, 2));
+            var cosn1 = d12 * d12 + d13 * d13 - d23 * d23;
+            cosn1 /= 2 * d12 * d13;
+            var sinn1 = Math.Sqrt(1 - cosn1 * cosn1);
+            var tann1 = sinn1 / cosn1;
+            var cosn2 = d12 * d12 + d23 * d23 - d13 * d13;
+            cosn2 /= 2 * d12 * d23;
+            var sinn2 = Math.Sqrt(1 - cosn2 * cosn2);
+            if (Math.Abs(sinn2 - sinn1) < 0.0000000001) sinn2 = -sinn2;
+            var tann2 = sinn2 / cosn2;
+            var C1 = n1.Data.Location.Y - tann1 * n1.Data.Location.X;
+            var C2 = n2.Data.Location.Y - tann2 * n2.Data.Location.X;
+            var A1 = tann1;
+            var A2 = tann2;
+            var B1 = -1.0;
+            var B2 = -1.0;
+            double delta = A1 * B2 - A2 * B1;
+            double x = (B2 * C1 - B1 * C2) / delta;
+            double y = (A1 * C2 - A2 * C1) / delta;
+            Debug.WriteLine("" + x + " " + y);
+            NodeCreated(n1.Data.Name + " + " + n2.Data.Name, (float)x, (float)y);
         }
 
         public void CalculateShortestPathWithCriteria(GPSGraph.Node node, Tuple<List<String>, List<String>> criteria)
@@ -162,10 +194,16 @@ namespace GPS.Views
                 };
                 criteriaPredicates.Add(typePredicate);
             }
-            this.area.highlighted = this.lastSelectedNode.GetBestPath(node, criteriaPredicates);
-            this.calculatingPath = true;
-            this.area.GraphChanged();
-            this.calculatingPath = false;
+            try
+            {
+                this.area.highlighted = this.lastSelectedNode.GetBestPath(node, criteriaPredicates);
+                this.calculatingPath = true;
+                this.area.GraphChanged();
+                this.calculatingPath = false;
+            } catch (Exception ex)
+            {
+                MessageBox.Show("No available route");
+            }
         }
 
         private void showItemsWithCriteriaToolStripMenuItem_Click(object sender, EventArgs e)

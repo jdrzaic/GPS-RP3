@@ -32,6 +32,7 @@ namespace GPS.Views
 
         public void GraphCleared()
         {
+            this.Controls.Clear();
             this.Refresh();
         }
 
@@ -40,9 +41,19 @@ namespace GPS.Views
             this.Size = new Size(1000, 1000);
         }
 
-        public void SetSize(int width, int height)
+        public void SetSize(float width, float height)
         {
-            this.Size = new Size(width, height);
+            var newWidth = this.ClientRectangle.Width;
+            var newHeight = this.ClientRectangle.Height;
+            if (width - 10 > newWidth)
+            {
+                newWidth = (int)width + 50;
+            }
+            if (height - 10 > newHeight)
+            {
+                newHeight = (int)height + 50;
+            }
+            this.Size = new Size(newWidth, newHeight);
             this.Refresh();
         }
 
