@@ -169,6 +169,7 @@ namespace GPS.Views
 
         public void ShowItemsWithCriteriaCallback(List<string> types, List<string> names)
         {
+            this.area.itemsToShow = new Tuple<List<string>, List<string>>(types, names);
             this.area.GraphChanged();
         }
     }

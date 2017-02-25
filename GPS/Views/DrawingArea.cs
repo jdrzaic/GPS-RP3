@@ -14,6 +14,7 @@ namespace GPS.Views
     public partial class DrawingArea : Panel
     {
         private GPSGraph graph;
+        public Tuple<List<string>, List<string>> itemsToShow = null;
         public IEnumerable<Tuple<GPSStreet, GPSGraph.Node>> highlighted { get; set; }
         public GraphMainForm creator { get; set; }
         public DrawingArea(GPSGraph graph, Form creator) : base()
@@ -69,6 +70,56 @@ namespace GPS.Views
             }
             pen.Color = Color.Red;
             if (this.creator.calculatingPath) HandleHighlighted(pen, graphics);
+            if (this.itemsToShow != null) HandleItemsToShow(pen, graphics);
+        }
+
+        private void HandleItemsToShow(Pen p, Graphics g)
+        {
+            foreach (var node in graph.Nodes)
+            {
+                if (CheckSatisfiesCriteria(node))
+                {
+                    var button = (LocationNodeButton)node.Data.AssociatedControl;
+                    button.InnerColor = Color.Green;
+                    button.OuterColor = Color.ForestGreen;
+                    button.Refresh();
+                }
+            }
+        }
+
+        private bool CheckSatisfiesCriteria(GPSGraph.Node node)
+        {;
+            var types = itemsToShow.Item1;
+            var names = itemsToShow.Item2;
+            var satisfied = new List<GPSGraph.Node>();
+            foreach (var type in types)
+            {
+                var foundType = false;
+                foreach (var characteristic in node.Data.Characteristics)
+                {
+                    if (characteristic.NodeType == (NodeType)Enum.Parse(
+                        typeof(NodeType), type))
+                    {
+                        foundType = true;
+                        break;
+                    }
+                }
+                if (!foundType) return false;
+            }
+            foreach (var name in names)
+            {
+                var foundName = false;
+                foreach (var characteristic in node.Data.Characteristics)
+                {
+                    if (characteristic.Name == name)
+                    {
+                        foundName = true;
+                        break;
+                    }
+                }
+                if (!foundName) return false;
+            }
+            return true;
         }
 
         private void HandleHighlighted(Pen p, Graphics g)

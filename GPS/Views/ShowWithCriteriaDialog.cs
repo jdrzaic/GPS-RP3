@@ -32,6 +32,12 @@ namespace GPS.Views
             this.listView1.Columns.Add("Name         ");
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            var typeValues = Enum.GetValues(typeof(NodeType));
+            foreach (var value in typeValues)
+            {
+                this.comboBox1.Items.Add(value.ToString());
+            }
+            this.comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {}
@@ -40,13 +46,13 @@ namespace GPS.Views
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var type = this.textBox1.Text;
+            var type = this.comboBox1.Text;
             var name = this.textBox2.Text;
             if (type != "") this.typesCriteria.Add(type);
             if (name != "") this.namesCriteria.Add(name);
             string[] row = new string[] { type, name};
             this.listView1.Items.Add(new ListViewItem(row));
-            this.textBox1.Text = "";
+            this.comboBox1.Text = "";
             this.textBox2.Text = "";
         }
 
