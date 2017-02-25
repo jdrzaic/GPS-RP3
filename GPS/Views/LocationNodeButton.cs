@@ -52,15 +52,21 @@ namespace GPS.Views
         private void ItemFindShortestWithCriteria_Click(object sender, EventArgs e)
         {
             if (!CheckNodeSelected()) return;
-            //create dialog for criteria
-            //this.creator.CalculateShortestPathWithCriteria(this.node);
-
+            var addCriteriaDialog = new AddCriteriasDialog(this);
+            addCriteriaDialog.ShowDialog();
         }
 
         private void ItemConnectBoth_Click(object sender, EventArgs e)
         {
             if (!CheckNodeSelected()) return;
             this.creator.CreateBothWayConnection(this.node);
+        }
+
+        public void ItemFindShortestWithCriteriaCallback(List<string> types,
+            List<string> names)
+        {
+            this.creator.CalculateShortestPathWithCriteria(this.node,
+                new Tuple<List<string>, List<string>>(types, names));
         }
 
         private void ItemConnectOne_Click(object sender, EventArgs e)
@@ -71,7 +77,7 @@ namespace GPS.Views
 
         private bool CheckNodeSelected()
         {
-            if (!this.creator.nodeSelected)
+            if (!this.creator.nodeSelected || this.creator.lastSelectedNode == this.node)
             {
                 MessageBox.Show("No origin node is selected", "No node");
                 return false;

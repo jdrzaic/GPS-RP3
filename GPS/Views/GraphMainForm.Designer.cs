@@ -32,11 +32,9 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cleanGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calculateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shortestPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shortestWithCriteriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showItemsWithCriteriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +42,6 @@
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
-            this.calculateToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
@@ -56,7 +53,8 @@
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addNodeToolStripMenuItem,
-            this.cleanGraphToolStripMenuItem});
+            this.cleanGraphToolStripMenuItem,
+            this.showItemsWithCriteriaToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -71,30 +69,9 @@
             // cleanGraphToolStripMenuItem
             // 
             this.cleanGraphToolStripMenuItem.Name = "cleanGraphToolStripMenuItem";
-            this.cleanGraphToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cleanGraphToolStripMenuItem.Text = "Clean Graph";
+            this.cleanGraphToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.cleanGraphToolStripMenuItem.Text = "Clear Graph";
             this.cleanGraphToolStripMenuItem.Click += new System.EventHandler(this.cleanGraphToolStripMenuItem_Click);
-            // 
-            // calculateToolStripMenuItem
-            // 
-            this.calculateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.shortestPathToolStripMenuItem,
-            this.shortestWithCriteriaToolStripMenuItem});
-            this.calculateToolStripMenuItem.Name = "calculateToolStripMenuItem";
-            this.calculateToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.calculateToolStripMenuItem.Text = "Calculate";
-            // 
-            // shortestPathToolStripMenuItem
-            // 
-            this.shortestPathToolStripMenuItem.Name = "shortestPathToolStripMenuItem";
-            this.shortestPathToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.shortestPathToolStripMenuItem.Text = "Shortest Path";
-            // 
-            // shortestWithCriteriaToolStripMenuItem
-            // 
-            this.shortestWithCriteriaToolStripMenuItem.Name = "shortestWithCriteriaToolStripMenuItem";
-            this.shortestWithCriteriaToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.shortestWithCriteriaToolStripMenuItem.Text = "Shortest Path with Criteria";
             // 
             // helpToolStripMenuItem
             // 
@@ -109,6 +86,13 @@
             this.userManualToolStripMenuItem.Name = "userManualToolStripMenuItem";
             this.userManualToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.userManualToolStripMenuItem.Text = "User manual";
+            // 
+            // showItemsWithCriteriaToolStripMenuItem
+            // 
+            this.showItemsWithCriteriaToolStripMenuItem.Name = "showItemsWithCriteriaToolStripMenuItem";
+            this.showItemsWithCriteriaToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.showItemsWithCriteriaToolStripMenuItem.Text = "Show items with criteria";
+            this.showItemsWithCriteriaToolStripMenuItem.Click += new System.EventHandler(this.showItemsWithCriteriaToolStripMenuItem_Click);
             // 
             // GraphMainForm
             // 
@@ -132,11 +116,9 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNodeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calculateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem shortestPathToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem shortestWithCriteriaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem userManualToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cleanGraphToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showItemsWithCriteriaToolStripMenuItem;
     }
 }

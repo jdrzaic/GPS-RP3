@@ -20,9 +20,12 @@ namespace GPS.Views
         public DrawingArea area;
         public bool calculatingPath = false;
 
-        public GraphMainForm()
+        public GraphMainForm(int graphId)
         {
-            this.graph = new GPSGraph();
+            //this.graph = Program.DbContext.Graphs   uncommment when database fixed
+            //    .Where(g => g.GraphId == GPSGraphId)
+            //    .FirstOrDefault();
+            this.graph = new GPSGraph();  //comment this once database works
             InitializeComponent();
             CustomizeComponent();
         }
@@ -67,11 +70,12 @@ namespace GPS.Views
             }
             var street = new GPSStreet();
             originNode.ConnectTo(street, node);
+            this.nodeSelected = false;
+            this.area.GraphChanged();
+            createStreetButton(originNode, node, street);
+            System.Threading.Thread.Sleep(500);
             var addStreetNameForm = new AddStreetNameForm(street);
             addStreetNameForm.ShowDialog();
-            this.area.GraphChanged();
-            this.nodeSelected = false;
-            createStreetButton(originNode, node, street);
         }
 
         public void createStreetButton(GPSGraph.Node node1, GPSGraph.Node node2, GPSStreet street) 
@@ -155,6 +159,17 @@ namespace GPS.Views
             this.calculatingPath = true;
             this.area.GraphChanged();
             this.calculatingPath = false;
+        }
+
+        private void showItemsWithCriteriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var showWithCriteriaDialog = new ShowWithCriteriaDialog(this);
+            showWithCriteriaDialog.ShowDialog();
+        }
+
+        public void ShowItemsWithCriteriaCallback(List<string> types, List<string> names)
+        {
+            this.area.GraphChanged();
         }
     }
 }

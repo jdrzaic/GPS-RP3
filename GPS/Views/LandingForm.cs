@@ -51,8 +51,7 @@ namespace GPS.Views
             int index = this.listBox1.IndexFromPoint(e.Location);
             if (index == ListBox.NoMatches) return;
             var graphName = this.listBox1.Items[index].ToString();
-            var graphForm = new GraphMainForm();
-            graphForm.graphId = this.GraphsInfo[graphName];
+            var graphForm = new GraphMainForm(this.GraphsInfo[graphName]);
             graphForm.ShowDialog();
         }
 
