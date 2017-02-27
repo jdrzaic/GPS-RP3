@@ -130,13 +130,14 @@ namespace GPS.Views
                 {
                     MessageBox.Show("No available routes");
                 }
-                this.calculatingPath = true;
-                this.area.GraphChanged();
-                this.calculatingPath = false;
             } catch(Exception ex)
             {
                 MessageBox.Show("No available routes");
+                this.area.highlighted = new List<Tuple<GPSStreet, GPSGraph.Node>>();
             }
+            this.calculatingPath = true;
+            this.area.GraphChanged();
+            this.calculatingPath = false;
         }
 
         public void AddItemFromExisting(GPSGraph.Node n2, float d13, float d23)
@@ -203,13 +204,16 @@ namespace GPS.Views
             try
             {
                 this.area.highlighted = this.lastSelectedNode.GetBestPath(node, criteriaPredicates);
-                this.calculatingPath = true;
-                this.area.GraphChanged();
-                this.calculatingPath = false;
+                this.area.criteria = criteria;
             } catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 MessageBox.Show("No available route");
+                this.area.highlighted = new List<Tuple<GPSStreet, GPSGraph.Node>>();
             }
+            this.calculatingPath = true;
+            this.area.GraphChanged();
+            this.calculatingPath = false;
         }
 
         private void showItemsWithCriteriaToolStripMenuItem_Click(object sender, EventArgs e)

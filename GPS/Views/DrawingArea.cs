@@ -16,6 +16,7 @@ namespace GPS.Views
         private GPSGraph graph;
         public Tuple<List<string>, List<string>> itemsToShow = null;
         public IEnumerable<Tuple<GPSStreet, GPSGraph.Node>> highlighted { get; set; }
+        public List<Tuple<string, string>> criteria { get; set; }
         public GraphMainForm creator { get; set; }
         public DrawingArea(GPSGraph graph, Form creator) : base()
         {
@@ -82,6 +83,7 @@ namespace GPS.Views
             pen.Color = Color.Red;
             if (this.creator.calculatingPath) HandleHighlighted(pen, graphics);
             if (this.itemsToShow != null) HandleItemsToShow(pen, graphics);
+            this.itemsToShow = null;
         }
 
         private void HandleItemsToShow(Pen p, Graphics g)
