@@ -14,7 +14,9 @@ namespace GPS
     {
         Store,
         PostOffice,
-        GasStation
+        GasStation,
+        Hospital,
+        Garage
     }
 
     [Table("GPSItemCharacteristic")]
