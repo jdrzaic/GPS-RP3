@@ -22,9 +22,9 @@ namespace GPS.Views
 
         public GraphMainForm(int graphId)
         {
-            //this.graph = Program.DbContext.Graphs   uncommment when database fixed
-            //    .Where(g => g.GraphId == GPSGraphId)
-            //    .FirstOrDefault();
+            this.graph = Program.DbContext.Graphs
+                .Where(g => g.GPSGraphId == graphId)
+                .FirstOrDefault();
             this.graph = new GPSGraph();  //comment this once database works
             InitializeComponent();
             CustomizeComponent();

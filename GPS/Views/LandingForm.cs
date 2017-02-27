@@ -29,7 +29,6 @@ namespace GPS.Views
             var entities = Program.DbContext.Graphs;
             foreach (var entity in entities)
             {
-                if (entity.graphName != "Varaždin" && entity.graphName != "Zagreb" && entity.graphName != "Rijeka") continue;
                 var name = entity.graphName;
                 if (name == null || name.Trim() == "") continue;
                 if (this.GraphsInfo.ContainsKey(name)) continue;
@@ -50,7 +49,7 @@ namespace GPS.Views
         private void ListBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int index = this.listBox1.IndexFromPoint(e.Location);
-            if (index == ListBox.NoMatches) return;
+            if (index == ListBox.NoMatches || index < 0) return;
             var graphName = this.listBox1.Items[index].ToString();
             var graphForm = new GraphMainForm(this.GraphsInfo[graphName]);
             graphForm.ShowDialog();
