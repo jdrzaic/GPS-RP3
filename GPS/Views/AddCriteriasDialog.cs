@@ -12,15 +12,13 @@ namespace GPS.Views
 {
     public partial class AddCriteriasDialog : Form
     {
-        private List<string> namesCriteria;
-        private List<string> typesCriteria;
+        private List<Tuple<string, string>> criteria;
         LocationNodeButton creator;
 
         public AddCriteriasDialog(LocationNodeButton creator)
         {
             this.creator = creator;
-            namesCriteria = new List<string>();
-            typesCriteria = new List<string>();
+            criteria = new List<Tuple<string, string>>();
             InitializeComponent();
             CustomizeComponent();
         }
@@ -48,8 +46,7 @@ namespace GPS.Views
         {
             var type = this.comboBox1.Text;
             var name = this.textBox2.Text;
-            if (type != "") this.typesCriteria.Add(type);
-            if (name != "") this.namesCriteria.Add(name);
+            if (type != "" && name != "") this.criteria.Add(new Tuple<string, string>(type, name));
             string[] row = new string[] { type, name};
             this.listView1.Items.Add(new ListViewItem(row));
             this.comboBox1.Text = "";
@@ -58,8 +55,7 @@ namespace GPS.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.creator.ItemFindShortestWithCriteriaCallback(
-                this.typesCriteria, this.namesCriteria);
+            this.creator.ItemFindShortestWithCriteriaCallback(this.criteria);
             Close();
         }
     }

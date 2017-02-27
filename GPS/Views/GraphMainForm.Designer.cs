@@ -31,9 +31,6 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cleanGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.userManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showItemsWithCriteriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -41,8 +38,7 @@
             // menuStrip2
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.editToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(584, 24);
@@ -53,7 +49,6 @@
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addNodeToolStripMenuItem,
-            this.cleanGraphToolStripMenuItem,
             this.showItemsWithCriteriaToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
@@ -62,30 +57,9 @@
             // addNodeToolStripMenuItem
             // 
             this.addNodeToolStripMenuItem.Name = "addNodeToolStripMenuItem";
-            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.addNodeToolStripMenuItem.Text = "Add Node";
             this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
-            // 
-            // cleanGraphToolStripMenuItem
-            // 
-            this.cleanGraphToolStripMenuItem.Name = "cleanGraphToolStripMenuItem";
-            this.cleanGraphToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.cleanGraphToolStripMenuItem.Text = "Clear Graph";
-            this.cleanGraphToolStripMenuItem.Click += new System.EventHandler(this.cleanGraphToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.userManualToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // userManualToolStripMenuItem
-            // 
-            this.userManualToolStripMenuItem.Name = "userManualToolStripMenuItem";
-            this.userManualToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.userManualToolStripMenuItem.Text = "User manual";
             // 
             // showItemsWithCriteriaToolStripMenuItem
             // 
@@ -116,9 +90,6 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNodeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem userManualToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cleanGraphToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showItemsWithCriteriaToolStripMenuItem;
     }
 }

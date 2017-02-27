@@ -144,55 +144,61 @@ namespace GPS.Views
             var n1 = this.lastSelectedNode;
             var d12 = Math.Sqrt(Math.Pow(n2.Data.Location.X - n1.Data.Location.X, 2) + Math.Pow(
                 n2.Data.Location.Y - n1.Data.Location.Y, 2));
-            var cosn1 = d12 * d12 + d13 * d13 - d23 * d23;
-            cosn1 /= 2 * d12 * d13;
+            var cosn1 = (d12 * d12 + d13 * d13 - d23 * d23) / (2 * d12 * d13);
             var sinn1 = Math.Sqrt(1 - cosn1 * cosn1);
-            var tann1 = sinn1 / cosn1;
-            var cosn2 = d12 * d12 + d23 * d23 - d13 * d13;
-            cosn2 /= 2 * d12 * d23;
-            var sinn2 = Math.Sqrt(1 - cosn2 * cosn2);
-            if (Math.Abs(sinn2 - sinn1) < 0.0000000001) sinn2 = -sinn2;
-            var tann2 = sinn2 / cosn2;
-            var C1 = n1.Data.Location.Y - tann1 * n1.Data.Location.X;
-            var C2 = n2.Data.Location.Y - tann2 * n2.Data.Location.X;
-            var A1 = tann1;
-            var A2 = tann2;
-            var B1 = -1.0;
-            var B2 = -1.0;
-            double delta = A1 * B2 - A2 * B1;
-            double x = (B2 * C1 - B1 * C2) / delta;
-            double y = (A1 * C2 - A2 * C1) / delta;
-            Debug.WriteLine("" + x + " " + y);
+            var h = sinn1 * d13; // length of h
+            var x12 = cosn1 * d13; // h part
+            var x12ratio = x12 / d12;
+            var hx = n1.Data.Location.X + x12ratio * (n2.Data.Location.X - n1.Data.Location.X);
+            var hy = n1.Data.Location.Y + x12ratio * (n2.Data.Location.Y - n1.Data.Location.Y);
+            var coefh = -1.0;
+            if (n1.Data.Location.X == n2.Data.Location.X) coefh = 0.0;
+            else
+            {
+                var tanbase = (n2.Data.Location.Y - this.lastSelectedNode.Data.Location.Y) /
+                    (n2.Data.Location.X - this.lastSelectedNode.Data.Location.X);
+                coefh = -1.0 / tanbase;
+            }
+            var all = 1 + coefh * coefh;
+            var unit = 1 / all;
+            var unitSqrt = Math.Sqrt(unit);
+            var sinh = coefh * unitSqrt;
+            var cosh = unitSqrt;
+            var x = hx + h * sinh;
+            var y = hy + h * cosh;
+            if (x < 0 || y < 0)
+            {
+                x = hx - h * sinh;
+                y = hy - h * cosh;
+
+            }
+            if (x < 0 || y < 0)
+            {
+                x = hx - h * sinh;
+                y = hy + h * cosh;
+            }
+            if (x < 0 || y < 0)
+            {
+                x = hx + h * sinh;
+                y = hy - h * cosh;
+            }
+            if (x < 0 || y < 0) return;
             NodeCreated(n1.Data.Name + " + " + n2.Data.Name, (float)x, (float)y);
         }
 
-        public void CalculateShortestPathWithCriteria(GPSGraph.Node node, Tuple<List<String>, List<String>> criteria)
+        public void CalculateShortestPathWithCriteria(GPSGraph.Node node, List<Tuple<string, string>> criteria)
         {
             var criteriaPredicates = new List<Predicate<GPSNode>>();
-            var types = criteria.Item1;
-            var names = criteria.Item2;
-            foreach (var name in names) {
+            foreach (var cr in criteria) {
                 Predicate<GPSNode> namePredicate = delegate (GPSNode g)
                 {
                     foreach (var c in g.Characteristics)
                     {
-                        if (c.Name == name) return true;
+                        if (c.Name == cr.Item2 && c.NodeType.ToString() == cr.Item1) return true;
                     }
                     return false;
                 };
                 criteriaPredicates.Add(namePredicate);
-            }
-            foreach (var type in types)
-            {
-                Predicate<GPSNode> typePredicate = delegate (GPSNode g)
-                {
-                    foreach (var c in g.Characteristics)
-                    {
-                        if (c.NodeType.ToString() == type) return true;
-                    }
-                    return false;
-                };
-                criteriaPredicates.Add(typePredicate);
             }
             try
             {
@@ -216,6 +222,11 @@ namespace GPS.Views
         {
             this.area.itemsToShow = new Tuple<List<string>, List<string>>(types, names);
             this.area.GraphChanged();
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

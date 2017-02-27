@@ -76,11 +76,9 @@ namespace GPS.Views
             this.creator.CreateBothWayConnection(this.node);
         }
 
-        public void ItemFindShortestWithCriteriaCallback(List<string> types,
-            List<string> names)
+        public void ItemFindShortestWithCriteriaCallback(List<Tuple<string, string>> criteria)
         {
-            this.creator.CalculateShortestPathWithCriteria(this.node,
-                new Tuple<List<string>, List<string>>(types, names));
+            this.creator.CalculateShortestPathWithCriteria(this.node, criteria);
         }
 
         private void ItemConnectOne_Click(object sender, EventArgs e)
