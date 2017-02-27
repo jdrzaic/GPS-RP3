@@ -21,6 +21,11 @@ namespace GPS.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (this.textBox1.Text.Trim() == "")
+            {
+                MessageBox.Show("Name field must not be empty");
+                return;
+            }
             street.Name = this.textBox1.Text;
             Close();
         }

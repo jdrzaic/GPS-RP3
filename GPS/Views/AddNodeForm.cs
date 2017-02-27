@@ -44,6 +44,11 @@ namespace GPS.Views
         private void button1_Click(object sender, EventArgs e)
         {
             if (this.creator == null) return;
+            if (this.textBox1.Text.Trim() == "")
+            {
+                MessageBox.Show("Name field must not be empty");
+                return;
+            }
             var name = this.textBox1.Text;
             var xCoordinate = this.numericUpDown1.Value;
             var yCoordinate = this.numericUpDown2.Value;
